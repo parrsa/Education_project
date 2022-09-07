@@ -10,7 +10,7 @@ class cards extends Component {
         }
       }
       componentDidMount(){
-        fetch('http://smartrebin.ir:7007/api/Account/GetCourse')
+        fetch('http://192.168.1.2:7007/api/Account/GetCourse')
         .then(response=>response.json())
         .then(data=>this.setState({SendGet:data}))
       }

@@ -1,3 +1,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+    font-family: "Yekan";
+    src: url("./Font/Yekan.ttf");
+  }
+  
+  @font-face {
+    font-family: "Titr";
+    src: url("./Font/BTitr.ttf");
+  }
+
+  @font-face {
+    font-family: "Bzar";
+    src: url("./Font/BZar.ttf");
+  }
+
+  @font-face {
+    font-family: "BzarBold";
+    src: url("./Font/BZarBold.ttf");
+  }

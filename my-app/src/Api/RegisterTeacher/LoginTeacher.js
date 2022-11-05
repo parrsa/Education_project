@@ -23,7 +23,6 @@ function LoginTeacher() {
   const [Address, SetAddress] = useState("");
   function GetAddress(event) {
     SetAddress(event.target.value);
-   
   }
   // ----------------------------------
   // Description

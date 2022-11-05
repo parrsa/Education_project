@@ -1,10 +1,11 @@
 import React from "react";
-import BannerImage from "../../image/19362653.jpg";
+import BannerImage from "../../image/19362653_preview_rev_1.png";
+import {Link} from 'react-router-dom'
 const banner = () => {
   return (
-    <div className="w-full mt-20  h-full ">
+    <div className="w-full mt-20   h-full ">
       <div className="grid grid-cols-2  h-full">
-        <div className=" grid col-span-1 sm:col-span-2  sm:left-20 bg-blue-800">
+        <div className=" grid col-span-1 sm:col-span-2  sm:left-20 bg-slate-50">
         <img className="w-full h-full" alt="Banner" src={BannerImage} />
         </div>
         <div dir="rtl" className=" grid  sm:col-span-2 col-span-1 ">
@@ -19,12 +20,17 @@ const banner = () => {
               شما به بازار کار خواهد شد
             </h4>
             <div className="w-3/4 h-20 sm:right-10  absolute flex justify-center items-center top-72">
-              <button className=" w-52 sm:px-11 sm:text-sm flex justify-center items-center rounded-2xl py-3 hover:bg-violet-800 shadow-violet-400 shadow-md bg-violet-700 text-lg text-white">
+          
+          <Link to='/courses'> <button  className=" w-52 sm:px-11 sm:text-sm flex justify-center items-center rounded-2xl py-3 hover:bg-violet-800 shadow-violet-400 shadow-md bg-violet-700 text-lg text-white">
                 مشاهده دوره
               </button>
-              <button className="w-52 sm:px-11 flex justify-center items-center hover:bg-violet-800 shadow-md shadow-violet-400 mr-7 py-3 rounded-2xl pr-5 text-white text-lg bg-violet-700">
+          </Link>
+          <Link to='/student-comments'>
+           <button className="w-52 sm:px-11 flex justify-center items-center hover:bg-violet-800 shadow-md shadow-violet-400 mr-7 py-3 rounded-2xl pr-5 text-white text-lg bg-violet-700">
                 نظرات
               </button>
+          </Link>
+             
             </div>
           </div>
         </div>

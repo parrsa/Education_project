@@ -1,5 +1,7 @@
 import React, { useState,useRef } from "react";
+import { Link ,useNavigate } from "react-router-dom";
 function LoginTeacher() {
+  const Navigate= useNavigate();
   // ----------------------------------
   // Phone
   const [Phone, SetPhone] = useState("");
@@ -115,7 +117,8 @@ function LoginTeacher() {
       </form>
     </div>
   );
-  function createuser() {
+  function createuser(e) {
+    e.preventDefault();
     let form_data = new FormData();
     form_data.append("Phone",Phone );
     form_data.append("name",Name );
@@ -134,7 +137,7 @@ function LoginTeacher() {
             body: form_data
           };
       
-          fetch('http:///smartrebin.ir:7007/api/Account/RegisterTeacher', requestOptions)
+          fetch('http://192.168.1.2:7007/api/Account/RegisterTeacher', requestOptions)
             .then(async response => {
               const isJson = response.headers.get('content-type')?.includes('application/json');
               const data = isJson && await response.json();
@@ -144,11 +147,11 @@ function LoginTeacher() {
               localStorage.setItem('TokenTeacher',JSON.stringify(data.token))
               if (response.ok) {
                 // router.push('/')
+        Navigate('/Pro')
               } else {
                 return alert("خطا در ثبت");
               }
             }).catch((error)=>console.log('sooooo',error))
         }
-
 }
 export default LoginTeacher;

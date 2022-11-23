@@ -2,23 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
-import Drop from './Api/dropdown'
 import Cards from "./Api/Card/Cards";
-import Aboute from "./Api/about us/About"
 import Login from "./Api/Membership/Login";
-import Studentcomments from "./Api/Comment/studentcomments";
 import Pro from './Api/Product/Product'
 import SignIn from './Api/Membership/Register'
-import LoginTeacher from './Api/RegisterTeacher/LoginTeacher'
+import MainTeacher from './Api/RegisterTeacher/Main'
+import RegisterTeacher from './Api/RegisterTeacher/Register'
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
+  // Route,
 } from "react-router-dom";
 // import RegisterUser from "./Api/Membership/RegisterUser";
 const router = createBrowserRouter([
 {
-  path:'/App',
+  path:'/App/*',
   element:<App/>,
   
 },
@@ -28,10 +26,6 @@ const router = createBrowserRouter([
 },
 
 {
-  path:'/Drop',
-  element:<Drop/>,
-},
-{
   path:'/Login',
   element:<Login/>,
 },
@@ -39,21 +33,18 @@ const router = createBrowserRouter([
 path:'/sign-up',
 element:<SignIn/>
 },
+
 {
-  path:'/About-us',
-  element:<Aboute/>,
-},
-{
-  path:'/student-comments',
-  element:<Studentcomments/>
-},
-{
-  path:'/Register-Teacher',
-  element:<LoginTeacher/>
+  path:'/Main',
+  element:<MainTeacher/>
 },
 {
   path:'/Pro',
   element:<Pro/>
+},
+{
+  path:'Register-Teacher',
+  element:<RegisterTeacher/>
 }
 ]);
 

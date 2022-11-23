@@ -1,42 +1,24 @@
-// import React from 'react';
-// import Navbar from '../NavBar/navbar';
-// import Banner from '../Banner/banner';
-// import Card from '../Card/cards'
-// import { useRef } from 'react';
-// import Footer from '../Footer/Footer';
-// const Home = () => {
-//   return (
-//     <div>
-//         <Navbar />
-//         <Banner/>
-//         <Card/>
-//          <br/>
-//         <Footer/>
-        
-//         {/* <Footer/> */}
-//         {/* <Index/> */}
-//     </div>
-//   )
-// }
-
-// export default Home
 import React, { Component } from 'react';
-import Navbar from '../NavBar/navbar';
-import Banner from '../Banner/banner';
+import Navbar from '../NavBar/Navbar';
+import Banner from '../Banner/Banner';
 import Card from '../Card/Cards';
 import Footer from '../Footer/Footer';
+import NewProducts from '../Card/NewProducts';
+import BannerBootm from '../Banner/BannerBootm';
+import FooterTop from '../Footer/FooterTop';
 class Home extends Component {
-  constructor(){
+  constructor(props){
     super();
-
   }
   render() {
     return (
-      <div className='bg-slate-50 '>
+      <div className='overflow-hidden bg-[#EFEFEF]'>
          <Navbar />
          <Banner/>
          <Card/>
-        
+         <NewProducts/>
+         <BannerBootm/>
+         <FooterTop/>
          <Footer/>
       </div>
     );

@@ -21,3 +21,28 @@
     font-family: "BzarBold";
     src: url("./Font/BZarBold.ttf");
   }
+   @font-face {
+    font-family: "KALAMEHBOLD";
+    src: url("./Font/KALAMEH_BOLD.TTF");
+  }
+
+  * {
+    scrollbar-width: 2px;
+    scrollbar-color: white;
+  }
+  
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  *::-webkit-scrollbar-track {
+    background: #ffffff; 
+    border-radius: 10px;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    background-color:#9370df;
+    border-radius: 10px;
+    /* border: 1px solid white ; */
+  }

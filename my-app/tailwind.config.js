@@ -4,15 +4,22 @@ module.exports = {
 
   theme: {
     extend: {
+      keyframes: {
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        }
+      },
       fontFamily: {
         yekan: ["Yekan"],
         Titr: ["Titr"],
         Bzar: ["Bzar"],
-        BzarBold:["BzarBold"]
+        BzarBold:["BzarBold"],
+        KALAMEHBOLD:["KALAMEHBOLD"]
       },
       screens: {
-        sm: { max: "640px" },
-        md: { max: "765px" },
+        sm: { min: "320px" , max: "896px" },
+        // md: { min: "640px" },
       },
       width: {
         128: "420px",
@@ -20,6 +27,7 @@ module.exports = {
         130: "470px",
         131: "620px",
       },
+     
     },
   },
   plugins: [],

@@ -1,5 +1,6 @@
 import React,{useState} from 'react'
 import {Link} from 'react-router-dom'
+import { Cookies, useCookies  } from 'react-cookie';
 const Register = () => {
 
 // ----------------------------------
@@ -44,30 +45,61 @@ const Register = () => {
     setState(e.target.value)
   }
 // ----------------------------------
-
+const [Cookiess, SetCookies] = useCookies(['TokenRegister'])
     function CreateUser(){
-    const body= JSON.stringify({
-    Name:Name,
-    Family:Family,
-    Email:Email,
-    Mobile:Mobile,
-    Password:Passwod,
-    ConfirmPassword:Confirm,
-    State:State,
-    City:City,
-  })
-    fetch('http://176.65.252.189:7007/api/Account/Register',{
-        method:"POST",
-        body:body,
-        headers:{ 
-            "Content-type": "application/json; charset=UTF-8",
-          }
-    })
-    .then(response=>response.json())
-    .then((data)=>{
-        localStorage.setItem('TokenRegisterUser', JSON.stringify(data.token))
-        console.log(data)
-    })
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+                      Name:Name,
+                      Family:Family,
+                      Email:Email,
+                      Mobile:Mobile,
+                      Password:Passwod,
+                      ConfirmPassword:Confirm,
+                      State:State,
+                      City:City,
+        })
+    };
+    fetch('http://192.168.1.2:7007/api/Account/Register', requestOptions)
+        .then(async response => {
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson && await response.json();
+
+            // check for error response
+            if (!response.ok) {
+                const error = (data && data.message) || response.status;
+                return Promise.reject(error);
+            }
+                SetCookies("TokenRegister",data.token , { path: '/courser' })
+                console.log(Cookiess)
+        })
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
+
+    // fetch('http://176.65.252.189:7007/api/Account/Register',{
+    //     method:"POST",
+    //     body:JSON.stringify({
+    //             Name:Name,
+    //             Family:Family,
+    //             Email:Email,
+    //             Mobile:Mobile,
+    //             Password:Passwod,
+    //             ConfirmPassword:Confirm,
+    //             State:State,
+    //             City:City,
+    //           }),
+    //     headers:{ 
+    //         "Content-type": "application/json; charset=UTF-8",
+    //       }
+    // })
+    // .then(response=>response.json())
+    // .then((data)=>{
+    //     // localStorage.setItem('TokenRegisterUser', JSON.stringify(data.token))
+    //     SetCookie("TokenRegister",data.token)
+    //     console.log(Cookies)
+    // })
 }
 
   return (

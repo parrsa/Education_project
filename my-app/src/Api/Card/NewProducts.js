@@ -6,7 +6,8 @@ import img from '../../image/3949076.png'
 import icon from "../../ui-site/Person.png";
 import icon1 from "../../ui-site/Time Machine.png";
 import icon2 from '../../image/icons8-query-30.png'
-import icon3 from '../../image/icons8-price-30.png'
+import icon3 from '../../image/icons8-price-30.png';
+import { useLocation } from 'react-router-dom';
 const NewProducts = (props) => {
   const [items, SetItems] = useState([]);
 //   const [items2, SetItems2] = useState([]);
@@ -36,7 +37,6 @@ const NewProducts = (props) => {
                 };
                 getDAta();
   }, []); 
-
   const navigate = useNavigate();
   const navigateToProductDetail = (item) => {
     navigate("/Pro", { state: { item } });

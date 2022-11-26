@@ -226,9 +226,9 @@ const Main = () => {
                       <button
                         type="submit"
                         class="w-11/12 text-white bg-[#9161F8] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                        onClick={() => SetCount()}
+                        onClick={()=>NavigateParsa('/app')}
                       >
-                        ادامه
+                        تایید
                       </button>
                     </div>
                     <p class=" text-sm mt-3 text-center text-black">

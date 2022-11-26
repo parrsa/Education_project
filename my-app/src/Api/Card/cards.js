@@ -11,26 +11,30 @@ import Footer from "../Footer/Footer";
 import Cookie from 'js-cookie'
 const Cards=()=> {
   const [item, SetItems] = useState([]); 
+
   const [search, setSearch] = useState("")
   const location = useLocation();
+
    const navigate = useNavigate();
   const navigateToProductDetail = (item) => {
     navigate("/Pro", { state: { item } });
   };
+
   useEffect(() => {
     const getDAta = async () => {
         const response = await fetch(
           "http://192.168.1.2:7007/api/Account/GetCourses"
           // "http://176.65.252.189:7007/api/Account/GetCourses"
         );
+
         const data = await response.json();
         SetItems(data)
-          console.log(SetItems)
-          console.log(location);
+          // console.log(SetItems)
+          // console.log(location);
           setSearch(location.state.SearchValue)
-        console.log(data[0]);
+        // console.log(data[0]);
         if(response.status===200){
-          console.log("object");
+          // console.log("object");
         }else if(response.status===403){
           console.log("first")
         }else{
@@ -38,8 +42,8 @@ const Cards=()=> {
         }  
     };
     getDAta()
-  }, []);
-  const SearchC=item.filter(coin => coin.name .includes(search));
+  }, [location]);
+    const SearchC=item.filter(product => product.name.toLowerCase() .includes(search.toLocaleLowerCase().slice(0,6)));
   return (
     <>
       <Navbar />
@@ -49,7 +53,7 @@ const Cards=()=> {
         <div className="w-full flex justify-between items-center  h-24">
           <h1 className="font-bold  text-xl sm:text-base sm:font-bold relative sm:mr-3 mr-32">
             <span className="text-[#9161F8] ml-2 ">- - - - - -</span>
-           برترین دوره های آموزشی
+           کل دوره های آموزشی
           
           </h1>
           <h1 className="font-bold text-xl hover:text-violet-800 transition-all cursor-pointer text-[#9161F8] relative sm:left-0 left-20">

@@ -189,7 +189,7 @@ const Register = () => {
                         />
                       </div>
                     </div>
-                    <div className="mr-10 mt-10">
+                    <div className="mr-10 mt-8">
                       <button
                         type="submit"
                         class="w-11/12 text-white bg-[#9161F8] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -198,7 +198,7 @@ const Register = () => {
                         ادامه
                       </button>
                     </div>
-                    <p class=" text-sm mt-3 text-center text-black">
+                    <p class=" text-sm mt-4 mb-3 text-center text-black">
                       قبلا ثبت نام کرده اید؟{" "}
                      <Link to='/Login'><a
                         href="#"
@@ -271,7 +271,7 @@ const Register = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="mr-10 mt-5">
+                    <div className="mr-10 mt-5 mb-10">
                       <button
                         onClick={createuser}
                         type="submit"

@@ -10,19 +10,23 @@ import { useEffect } from "react";
 import Cookie from 'cookie'
 import { useNavigate } from "react-router-dom";
 const Banner = () => {
-  const [SearchValue,SetSearch]=useState([]);
+  const [SearchValue,SetSearch]=useState("");
   const SetValue=(e)=>{
     SetSearch(e.target.value);
   }
-  const navigate = useNavigate();
-  useEffect(()=>{
-    navigate('/app' , {state : {SearchValue}})
-  },[SetValue])
+
+  
+    const navigate = useNavigate();
+    useEffect(()=>{
+      navigate('' , {state : {SearchValue}})
+    },[SearchValue])
+
+
   return (
     <div className="w-full mt-20 h-[560px] font-KALAMEHBOLD bg-[#9161F8]  ">
       <div className="grid grid-cols-2 grid-rows-2   h-96">
         <div className="col-span-1  sm:col-span-2 flex justify-start relative sm:left-[30px] top-10 left-56 mt-2  ">
-          <img alt="BannerImage" className="w-72 sm:w-72 sm:h-64  h-72" src={BannerImage} />
+          <img alt="BannerImage" className="w-96 sm:w-72 sm:h-64  h-72" src={BannerImage} />
         </div>
         <div dir="rtl" className="grid sm:col-span-2 col-span-1 ">
           <div className=" w-5/6 h-96 text-white  flex justify-start items-center relative top-16 sm:top-14  sm:left-28  mr-40">
@@ -39,8 +43,8 @@ const Banner = () => {
       </div>
         <div dir="rtl" className="w-3/6 left-96 sm:left-0 sm:mt-10 sm:w-80 h-24 flex justify-center items-center -mt-10 absolute  ">
         <div className='w-4/5 mr-20  relative left-16 '>
-       <img alt='Icon' onClick={""} className='w-5 h-5 mt-3 mr-2  absolute' src={Search}/>
-       <input value={SearchValue} onChange={SetValue} type="text" name="" className='w-full outline-none text-white  bg-transparent border-2 border-gray-300 placeholder-white py-3 px-10 rounded-3xl' 
+       <img alt='Icon' onClick={"acCC"} className='w-5 h-5 mt-4 mr-3  absolute' src={Search}/>
+       <input value={SearchValue}  onChange={SetValue} type="text" name="" className='w-full outline-none text-white  bg-transparent border-2 border-gray-300 placeholder-white py-3 px-10 rounded-3xl' 
        placeholder='جستجو' id="" />
       </div>
 

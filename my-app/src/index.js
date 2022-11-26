@@ -16,7 +16,7 @@ import {
 // import RegisterUser from "./Api/Membership/RegisterUser";
 const router = createBrowserRouter([
 {
-  path:'/App/*',
+  path:'/App',
   element:<App/>,
   
 },

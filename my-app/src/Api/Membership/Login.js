@@ -30,17 +30,88 @@ const Main = () => {
         const data = isJson && (await response.json()); console.log(data)
         if (response.status === 200) {
           Cookies.set('TokenLogin1' , data.token ,{
-            expires: 0.10/24,
+            expires: 0.20/24,
         secure: true,
         sameSite:'strict',
         path:'/'
           })
-          NavigateParsa('/App')
+          NavigateParsa('/')
         }
       })
     }
-
   // End-Login-api
+
+    // Start-Api
+  const [Name,setName]=useState("");
+  function SendName(e){
+    setName(e.target.value)
+  };
+
+// ----------------------------------
+    const [Family,setFamily]=useState('');
+    function SendFamily(e){
+      setFamily(e.target.value)
+    }
+// ----------------------------------
+    const [Email,SetEmail]=useState("");
+    function SendEmail(e){
+    SetEmail(e.target.value)
+  }
+// ----------------------------------
+    const [Mobile,setMobile]=useState("");
+    function SendPhone(e){
+    setMobile(e.target.value)
+  }
+// ----------------------------------
+    const [Passwod,setPassword]=useState("");
+    function SendPass(e){
+    setPassword(e.target.value)
+  }
+// ----------------------------------
+    const [Confirm,setConfirm]=useState("");
+    function SendConfirm(e){
+    setConfirm(e.target.value)
+  }
+// ----------------------------------
+    const [City,setCity]=useState("");
+    function SendCity(e){
+    setCity(e.target.value)
+  }
+// ----------------------------------
+    const [State,setState]=useState("");
+    function SendState(e){
+    setState(e.target.value)
+  }
+// ----------------------------------
+    function CreateUser(){
+      const requestOptions = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ 
+                      Name:Name,
+                      Family:Family,
+                      Email:Email,
+                      Mobile:Mobile,
+                      Password:Passwod,
+                      ConfirmPassword:Confirm,
+                      State:State,
+                      City:City,
+        })
+    };
+    fetch('http://192.168.1.2:7007/api/Account/Register', requestOptions)
+        .then(async response => {
+            const isJson = response.headers.get('content-type')?.includes('application/json');
+            const data = isJson && await response.json();
+
+            // check for error response
+            if (response.ok) {
+            alert('تایید')
+            }
+        })
+        .catch(error => {
+            console.error('There was an error!', error);
+        });
+}
 
   return (
     <div>
@@ -51,17 +122,17 @@ const Main = () => {
             <div className="col-span-1 flex  justify-center items-center row-span-2 sm:hidden">
               <img
                 alt="icon"
-                className="w-[400px] relative left-20 h-[400px]"
+                className="w-[400px] md:left-10 relative left-20 h-[400px]"
                 src={BannerImage}
               />
             </div>
             {Count === 1 && (
-              <div className="col-span-1 flex  justify-center mt-52 row-span-2 sm:row-span-2 sm:col-span-2">
-                <div className="w-[55%] sm:w-[95%] h-[75%] rounded-xl overflow-hidden shadow-lg shadow-violet-800  bg-white">
+              <div className="col-span-1 flex  justify-center mt-52  row-span-2 sm:row-span-2 sm:col-span-2">
+                <div className="w-[55%] md:w-[75%] md:left-5 md:-mt-10 relative sm:w-[95%] h-[75%] md:h-[85%] rounded-xl overflow-hidden shadow-lg shadow-violet-800  bg-white">
                   <h1 className="text-center text-2xl mt-3">ورود</h1>
                   <div dir="rtl" className="text-lg">
                     <div>
-                      <div className="mr-10">
+                      <div className="mr-10 md:mr-5">
                         <label for="mobile" class="mt-10 text-gray-900 ">
                           شماره موبایل
                         </label>
@@ -69,10 +140,10 @@ const Main = () => {
                           value={Phone}
                           onChange={PostMobile}
                           type={"number"}
-                          className="block w-11/12 mt-2 px-2  py-2 bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                          className="block w-11/12 mt-2 md:mt-1 px-2  py-2 bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                       </div>
-                      <div className="mr-10">
+                      <div className="mr-10 md:mr-5">
                         <label
                           for="password"
                           class="relative top-7 ext-gray-900 "
@@ -83,11 +154,11 @@ const Main = () => {
                           type={"password"}
                           value={Password}
                           onChange={PostPassword}
-                          className="block w-11/12 mt-8 px-2  py-2 bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                          className="block w-11/12 mt-8  px-2  py-2 bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                       </div>
 
-                      <div className="mr-10 mt-10">
+                      <div className="mr-10 md:mr-5 md:mt-5 mt-10">
                         <button
                           type="submit"
                           class="w-11/12 text-white bg-[#9161F8] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
@@ -96,7 +167,7 @@ const Main = () => {
                           ادامه
                         </button>
                       </div>
-                      <p class=" text-sm mt-3 text-center text-black">
+                      <p class=" text-sm mt-3 md:ml-2 md:mt-2 text-center text-black">
                         <Link to="/Login">
                           <a
                             onClick={() => SetCount(2)}
@@ -117,38 +188,40 @@ const Main = () => {
 
             {Count === 2 && (
               <div className="col-span-1 flex  justify-center mt-24 row-span-2 sm:row-span-2 sm:col-span-2">
-                <div className="w-[55%] sm:w-[95%] h-[96%] rounded-xl overflow-hidden shadow-lg shadow-violet-800  bg-white">
-                  <h1 className="text-center text-2xl mt-3">ثبت نام</h1>
+                <div className="w-[55%] md:w-[80%] sm:w-[95%] h-[96%] rounded-xl overflow-hidden shadow-lg shadow-violet-800  bg-white">
+                  <h1 className="text-center text-2xl mt-3 md:mt-1">ثبت نام</h1>
                   <div dir="rtl" className="text-lg">
                     <div id="hide">
                       <div className="mr-10">
-                        <label for="name" class="mt-10 text-gray-900 ">
+                        <label for="name" class="mt-10  text-gray-900 ">
                           نام
                         </label>
                         <input
                           type={"text"}
-                          //    value={Name}
-                          //    onChange={GetName}
-                          className="block w-11/12   mt-1 px-2   bg-white border rounded-md focus:border-purple-800
+                             value={Name}
+                             onChange={SendName}
+                          className="block w-11/12 mt-1 px-2   bg-white border rounded-md focus:border-purple-800
                         focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                       </div>
-                      {/* <div className="mr-10">
+                      <div className="mr-10">
                      <label for="fname" class="mt-10 xt-gray-900 ">
                        نام خانوادگی
                      </label>
                      <input
+                     value={Family}
+                     onChange={SendFamily}
                        type={"text"}
-                       className="block w-11/12 mt-1 px-2   bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                       className="block w-11/12 mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                      />
-                   </div> */}
+                   </div>
                       <div className="mr-10">
                         <label for="mobile" class="mt-10 text-gray-900 ">
                           شماره موبایل
                         </label>
                         <input
-                          //    value={Phone}
-                          //    onChange={GetPhone}
+                           value={Mobile}
+                        onChange={SendPhone}
                           type={"number"}
                           className="block w-11/12 mt-1 px-2   bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
@@ -159,8 +232,8 @@ const Main = () => {
                         </label>
                         <input
                           type={"email"}
-                          //    value={Email}
-                          //    onChange={GetMail}
+                          value={Email}
+                          onChange={SendEmail}
                           className="block w-11/12 mt-1 px-2   bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                       </div>
@@ -170,8 +243,8 @@ const Main = () => {
                         </label>
                         <input
                           type={"password"}
-                          //    value={Password}
-                          //    onChange={GetPassword}
+                          value={Passwod}
+                          onChange={SendPass}   
                           className="block w-11/12 mt-1 px-2   bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                       </div>
@@ -181,22 +254,12 @@ const Main = () => {
                         </label>
                         <input
                           type={"password"}
-                          //    value={Confirm}
-                          //    onChange={GetConfirm}
+                             value={Confirm}
+                             onChange={SendConfirm}
                           className="block w-11/12 mt-1 px-2    bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                       </div>
-                      <div className="mr-10">
-                        <label for="password" class="mt-10 text-gray-900 ">
-                          تایید رمز عبور
-                        </label>
-                        <input
-                          type={"password"}
-                          //    value={Confirm}
-                          //    onChange={GetConfirm}
-                          className="block w-11/12 mt-1 px-2    bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                        />
-                      </div>
+                     
                       <div className="flex">
                         <div className="mr-10">
                           <label for="password" class="mt-10 text-gray-900 ">
@@ -204,8 +267,8 @@ const Main = () => {
                           </label>
                           <input
                             type={"password"}
-                            //    value={Confirm}
-                            //    onChange={GetConfirm}
+                            value={State}
+                            onChange={SendState}
                             className="block w-11/12 mt-1 px-2    bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                           />
                         </div>
@@ -215,18 +278,18 @@ const Main = () => {
                           </label>
                           <input
                             type={"password"}
-                            //    value={Confirm}
-                            //    onChange={GetConfirm}
+                            value={City}
+                              onChange={SendCity}
                             className="block w-11/12 mt-1 px-2    bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                           />
                         </div>
                       </div>
                     </div>
-                    <div className="mr-10 mt-10">
+                    <div className="mr-10 mt-10 md:-mt-0">
                       <button
                         type="submit"
                         class="w-11/12 text-white bg-[#9161F8] font-medium rounded-lg text-sm px-5 py-2.5 text-center"
-                        onClick={()=>NavigateParsa('/app')}
+                        onClick={CreateUser}
                       >
                         تایید
                       </button>

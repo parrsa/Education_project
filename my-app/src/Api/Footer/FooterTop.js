@@ -5,15 +5,15 @@ const FooterTop = () => {
     <>
     <div className="w-full sm:h-[500px]  h-[385px] font-KALAMEHBOLD bg-[#D9D9D9]  ">
         <div className="grid grid-cols-3 grid-rows-3 sm:grid-rows-2  h-96">
-          <div className="col-span-1 sm:hidden flex justify-center">
+          <div className="col-span-1  sm:hidden flex justify-center">
             <img
               alt="icon"
-              className="w-80  mt-20 relative left-12 h-56"
+              className="w-80 md:w-72 mt-20 relative left-12 md:left-0 h-56"
               src={Img}
             />
           </div>
           <div dir="rtl" className="col-span-1 flex sm:justify-center sm:items-center sm:col-span-3 sm:row-span-1">
-            <div className="mt-16 sm:mt-14 sm:mr-0 mr-10">
+            <div className="mt-16 sm:mt-14 sm:mr-0 md:-mr-16 mr-10">
               <h1 className='sm:mr-32 text-xl sm:mt-5'>درمورد سایت</h1>
 
               <h4 className="w-80 mt-2 sm:w-[330px] text-gray-600">

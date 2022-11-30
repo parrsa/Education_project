@@ -43,7 +43,7 @@ const NewProducts = (props) => {
   };
 
   return (
-    <div dir="rtl" className="w-full flex justify-center  font-KALAMEHBOLD  mb-20  h-fit">
+    <div dir="rtl" className="w-full flex justify-center  font-KALAMEHBOLD  mb-20  h-80">
     <div className="w-11/12  h-fit">
     <div className="w-full flex justify-between items-center  h-24">
       <h1 className="font-bold  text-xl sm:text-base relative sm:mr-0 mr-32 md:mr-0">
@@ -64,11 +64,11 @@ const NewProducts = (props) => {
                   <img alt="img" className="rounded-xl  sm:w-full  sm:h-[100px] h-40" src={img}/>
                 </div>
                 <div dir="rtl" className="flex relative  w-64 h-64 sm:bottom-3  rounded-xl justify-center items-center ">
-                  <h1 className="absolute top-5 text-center sm:-mr-20  ">{item.name}</h1>
+                  <h1 className="absolute top-5 text-center sm:-mr-20  ">{"name"}</h1>
                   <hr className="w-56 sm:w-36 sm:left-24 bg-gray-600 mb-36  sm:mb-40 absolute "></hr>
                   <h3 className="flex overflow-hidden ml-24 mb-28 sm:ml-28 sm:-mt-4  mt-5 ">
                     <span className="absolute  text-gray-700 mr-6 mt-1 text-sm">
-                      مدرس دوره : {item.name}
+                      مدرس دوره : {"name"}
                     </span>
                     <img alt="icon" className="w-5 h-5 ml-28 " src={icon} />
                   </h3>
@@ -80,7 +80,7 @@ const NewProducts = (props) => {
                   </h5>
                   <h5 className="absolute  sm:ml-[75px] sm:mb-12 ">
                     <span className=" w-48 absolute mr-8 sm:mr-0  text-sm">
-                      {` ${item.price}تومان`}
+                      {/* {` ${price}تومان`} */}
                     </span>{" "}
                   </h5>
                 </div>

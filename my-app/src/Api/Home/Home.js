@@ -3,7 +3,7 @@ import Navbar from '../NavBar/Navbar';
 import Banner from '../Banner/Banner';
 import Card from '../Card/Cards';
 import Footer from '../Footer/Footer';
-import NewProducts from '../Card/NewProducts';
+import NewProducts from '../Card/NewPro';
 import BannerBootm from '../Banner/BannerBootm';
 import FooterTop from '../Footer/FooterTop';
 class Home extends Component {

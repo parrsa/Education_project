@@ -3,6 +3,10 @@ module.exports = {
   content: ["./src/**/*.{js,jsx,ts,tsx}"],
 
   theme: {
+    screens: {
+      sm: { min: "320px" , max: "600px" },
+      md: { min: "601px" , max: "1024px" }
+    }, 
     extend: {
       keyframes: {
         wiggle: {
@@ -16,10 +20,6 @@ module.exports = {
         Bzar: ["Bzar"],
         BzarBold:["BzarBold"],
         KALAMEHBOLD:["KALAMEHBOLD"]
-      },
-      screens: {
-        sm: { min: "320px" , max: "896px" },
-        // md: { min: "640px" },
       },
       width: {
         128: "420px",

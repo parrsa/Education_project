@@ -10,15 +10,14 @@ import Video from "../../ui-site/Video.png";
 import ProductCategory from "./ProductCategory";
 const Product = () => {
   function classNames(...classes) {
-    return classes.filter(Boolean).join(" ");
+    return classes.filter(Boolean).join("");
   }
   const { state } = useLocation();
   const [item, setItem] = useState({});
   useEffect(() => {
     const getDAta = async () => {
       setItem(state.item);
-      const response = await fetch(
-        `http://192.168.1.2:7007/api/Account/GetCourse/${state.item.id}`
+      const response = await fetch(`http://192.168.1.2:7007/api/Account/GetCourse/${state.item.id}`
       );
       const data = await response.json();
       setItem(data);

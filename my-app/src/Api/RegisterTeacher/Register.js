@@ -7,6 +7,7 @@ import { Route } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie'
 import Upload from "../../ui-site/Upload1.png";
 import BannerImage from '../../ui-site/undraw_reading_time_re_phf7 1.png'
 const Register = () => {
@@ -98,10 +99,14 @@ const Register = () => {
 
         // check for error response
         console.log(data);
-        localStorage.setItem("TokenTeacher", JSON.stringify(data.token));
         if (response.ok) {
-          // router.push('/')
-          
+          Cookies.set('TokenRegisterTeacher' , data.token ,{
+            expires: 0.10/24,
+        secure: true,
+        sameSite:'strict',
+        path:'/'
+          })
+        Navigate('/')
         } else {
           return alert("خطا در ثبت");
         }

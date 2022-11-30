@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 const Main = () => {
     const Navigate=useNavigate();
     const Handeler=()=>{
-            Navigate('/Register-Teacher')
+    Navigate('/Register-Teacher')
     }
   return (
     <div>
@@ -16,7 +16,7 @@ const Main = () => {
         <div className="w-full h-10/12 ">
         <div className="grid grid-cols-2  grid-rows-2 h-full " >    
             <div className="col-span-1 flex  justify-center items-center row-span-2 sm:col-span-2 sm:row-span-1 ">
-                <img alt="icon" className="sm:w-96 mt-20 sm:mt-24" src={ImgBanner}/>
+                <img alt="icon" className="sm:w-96   mt-20 sm:mt-24" src={ImgBanner}/>
             </div> 
             <div dir="rtl" className=" col-span-1 flex justify-center items-center row-span-2 sm:col-span-2 sm:row-span-1 ">
             <div className="grid sm:  mt-56 grid-rows-2">

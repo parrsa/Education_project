@@ -51,21 +51,21 @@ const Cards=()=> {
         <div className="w-11/12  h-fit">
 
         <div className="w-full flex justify-between items-center  h-24">
-          <h1 className="font-bold  text-xl sm:text-base sm:font-bold relative sm:mr-3 mr-32">
+          <h1 className="font-bold  text-xl sm:text-base sm:font-bold relative sm:mr-3 mr-32 md:mr-3">
             <span className="text-[#9161F8] ml-2 ">- - - - - -</span>
            کل دوره های آموزشی
           
           </h1>
-          <h1 className="font-bold text-xl hover:text-violet-800 transition-all cursor-pointer text-[#9161F8] relative sm:left-0 left-20">
+          <h1 className="font-bold text-xl hover:text-violet-800 transition-all cursor-pointer text-[#9161F8] relative sm:left-0 left-20 md:left-0">
          <Link to='/courses'>
          <a >مشاهده همه دوره</a>
          </Link>  
           </h1>
         </div>
-        <div className="flex  justify-evenly mr-5 sm:-mr-5 ">
-          <div className="grid grid-cols-4 sm:grid-cols-2 sm:gap-4 sm:mr-4  gap-8">
+        <div className="flex  justify-evenly mr-5 md:-mr-4 sm:-mr-5 ">
+          <div className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-4 sm:mr-4  gap-8">
           
-            {SearchC.map((item) => (
+            {SearchC.map((item) => item <= 3  ( 
                <div onClick={()=>navigateToProductDetail(item)} className="w-64 sm:w-[170px] h-80 sm:h-[225px] sm:shadow-md sm:shadow-[#9161F8]  sm:rounded-md rounded-xl bg-white shadow-md">
                 <div className="w-64 sm:w-[170px]  h-40 sm:h-[100px] sm:rounded-md rounded-xl   ">
                   <img alt="img" className="rounded-xl  sm:w-full  sm:h-[100px] h-40" src={img}/>

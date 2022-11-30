@@ -23,13 +23,31 @@ const ShowDrop=()=>{
   })
 }
 const Navbar=()=>  {
- 
-  const Cook= Cookie.get('TokenLogin1')
+  const [roll , SetRoll]=useState();
+    const Cook= Cookie.get('TokenLogin1')
+    useEffect(() => {
+      const getDAta = async () => {
+          const response = await fetch(`http://192.168.1.2:7007/api/TokenCheck/CheckToken`,{
+            method: 'GET',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + Cook,
+            }
+          });
+          const data = await response.json();
+          SetRoll(data)
+          console.log(roll)
+      };
+      getDAta()
+    },);
+
+
   const Navigate = useNavigate();
     return (
-      <div dir="rtl" className="w-full fixed bg-[#9161F8]  sm:z-50 z-10 font-KALAMEHBOLD  h-20 top-0 flex justify-between items-center">
-       <Link to={'/app'}>
-      <div   className=" w-20 sm:hidden  mr-32  h-20 z-10 flex  rounded-full mt-6 ">
+      <div dir="rtl" className="w-full fixed bg-[#9161F8]  sm:z-50 md:z-50 z-10 font-KALAMEHBOLD  h-20 top-0 flex justify-between items-center">
+       <Link to={'/'}>
+      <div   className=" w-20 sm:hidden mr-32 md:mr-0  h-20 z-10 flex  rounded-full mt-6 ">
       <img  className="w-14 cursor-pointer mr-10 h-14" src={Logo} alt="logo" />
       </div>
        </Link>  
@@ -40,15 +58,15 @@ const Navbar=()=>  {
       <span class="block w-8 h-0.5 bg-black"></span>
     </div>
         </div>
-         <ul className="flex absolute  sm:bg-[#9161F8] sm:shadow-sm sm:shadow-[#9161F8] text-white  sm:mr-0 mr-40 p-20 
+         <ul className="flex absolute  sm:bg-[#9161F8] sm:shadow-sm sm:shadow-[#9161F8] text-white  sm:mr-0 mr-40 md:mr-0 p-20 
          sm:w-64 sm:h-80 sm:top-20  sm:-translate-y-[490PX]   ">
           
-        <Link to='/app'><li className="relative mr-10 sm:hover:bg-slate-100 sm:w-52 sm:-top-14 sm:-mr-14 sm:p-0 sm:text-2xl cursor-pointer transition-all  hover:text-violet-800  p-1.5 ">
+        <Link to='/'><li className="relative mr-10 sm:hover:bg-slate-100 sm:w-52 sm:-top-14 sm:-mr-14 sm:p-0 sm:text-2xl cursor-pointer transition-all  hover:text-violet-800  p-1.5 ">
           <a href="#">
             خانه</a>
           </li>
           </Link>
-
+      
       <Link  to='/courses'> 
        <li  className="relative mr-10 sm:hover:bg-slate-100 sm:w-52 sm:-top-14 sm:-mr-14 sm:p-0 sm:mt-5 p-1.5 cursor-pointer sm:text-2xl  transition-all  hover:text-violet-800">
         <a href="../Card/">دوره ها </a>
@@ -65,7 +83,7 @@ const Navbar=()=>  {
 
       {Cook==null && 
       <Link to='/Login'>
-        <div className='w-32 h-2 left-40 sm:-left-7 absolute '>
+        <div className='w-32 h-2 left-40 md:-left-4 sm:-left-7 absolute '>
           <span className='absolute -mt-3 -mr-2'><img className='w-10 -mr-3' alt="icon" src={Account}/></span>
           <ul className='text-white'>
          <li className=" m-3 transition-all  hover:text-violet-800  -mt-3 cursor-pointer "><a href="#">ورود/ثبت نام</a></li>
@@ -80,7 +98,7 @@ const Navbar=()=>  {
             <Menu as="div" className="relative m-28 inline-block text-right">
       <div>
         <Menu.Button className=" w-full flex justify-center rounded-md border absolute border-gray-300 bg-violet-700 text-white px-8 -mt-4 -mr-12 py-2 text-sm font-medium ">
-          عضویت
+          پروفایل
           {/* <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" /> */}
         </Menu.Button>
       </div>
@@ -130,8 +148,6 @@ const Navbar=()=>  {
                 )}
               </Menu.Item>
 
-
-
               <Menu.Item>
                 {({ active }) => (
                <Link to='/Login'>
@@ -152,7 +168,7 @@ const Navbar=()=>  {
               <Menu.Item>
                 {({ active }) => (
                   <button 
-                  onClick={()=>{Cookie.remove('TokenLogin1') && Navigate('/App')}}
+                  onClick={()=>{Cookie.remove('TokenLogin1') && Navigate('/')}}
                     type="submit"
                     className={classNames(
                       active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',

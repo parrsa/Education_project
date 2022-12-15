@@ -1,14 +1,20 @@
-import { useLocation, Link } from "react-router-dom";
 import React, { useState, useEffect, Fragment } from "react";
+import { useLocation, Link } from "react-router-dom";
+import { Menu, Transition } from "@headlessui/react";
+import toast, { Toaster } from 'react-hot-toast';
+import Swal from 'sweetalert2';
 import Navbar from "../NavBar/Navbar";
 import FooterTop from "../Footer/FooterTop";
 import Footer from "../Footer/Footer";
 import Profile from "../../ui-site/Profile.png";
 import Time from "../../ui-site/Time Circle.png";
-import { Menu, Transition } from "@headlessui/react";
 import Video from "../../ui-site/Video.png";
 import ProductCategory from "./ProductCategory";
+import Cookie from 'js-cookie';
+import { useNavigate } from "react-router-dom";
 const Product = () => {
+ const navigate=useNavigate();
+ const Cook= Cookie.get('TokenLogin1')
   function classNames(...classes) {
     return classes.filter(Boolean).join("");
   }
@@ -25,6 +31,90 @@ const Product = () => {
     getDAta();
   }, []);
 
+//   function CreateUser(){
+//     const requestOptions = {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/json' ,   'Authorization': 'Bearer ' + Cook },
+//       body: JSON.stringify({ 
+//         courseId : item.id ,
+//         accountPriceId : 6
+//       })
+//   };
+//   fetch('http://192.168.1.2:7007/api/Basket/AddBasket', requestOptions)
+//       .then(async (response) => {
+//         const isJson = response.headers .get('Content-Type') ?.includes("application/json");
+//         const data = isJson && (await response.json()); 
+//         console.log(data)
+//       })
+//           console.error('There was an error!');
+// }
+const Swal = require('sweetalert2')
+const CreateUser = async () => {
+  if(Cook){
+    const response = await fetch(`http://192.168.1.2:7007/api/Basket/AddBasket`,{
+    method: 'POST',
+    body: JSON.stringify({
+      courseId : item.id ,
+        accountPriceId : 6
+    }),
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + Cook,
+    }
+  });
+const data = await response.json();
+console.log(data)
+Swal.fire({
+  position: 'top-end',
+  icon: 'success',
+  text: 'دوره به سبد خرید افزوده شد',
+  showConfirmButton: false,
+  timer: 1500
+})
+  }
+  else{
+    Swal.fire(
+      {
+      position: 'top-end',
+      icon: 'error',
+      text: 'برای خرید در دوره  وارد حساب کاربری خود شوید ',
+      showConfirmButton: false,
+      timer: 1500
+    }
+    )
+    // Swal.fire({
+    //   title: 'Custom animation with Animate.css',
+    //   showClass: {
+    //     popup: 'animate__animated animate__fadeInDown'
+    //   },
+    //   hideClass: {
+    //     popup: 'animate__animated animate__fadeOutUp'
+    //   }
+    // })
+    setTimeout(()=>{
+navigate('/login')
+    },2000)
+    
+  }
+  
+};
+
+// const Click= ()=>{
+//   if(Cook){
+//     const requestOptions ={
+//       method : "POST",
+//       headers: { "Content-Type": "application/json" },
+//       body:{courseId:item.id , accountPriceId : 6}
+//     }
+//     fetch('http://192.168.1.2:7007/api/Basket/AddBasket' , requestOptions)
+//   .then( response =>{
+//     const isJson = response.headers .get('Content-Type') ?.includes("application/json");
+//     const data = isJson &&response.json();
+//      console.log(data)
+//   })
+//   }
+// }
   return (
     <>
       <div>
@@ -79,7 +169,7 @@ const Product = () => {
 
                     <p className="absolute  right-60">ندارد</p>
                   </div>
-                  <button className="w-64 h-8 mt-28 text-white rounded-xl transition-all hover:bg-violet-800  bg-[#9161F8]">
+                  <button onClick={CreateUser} className="w-64 h-8 mt-28 text-white rounded-xl transition-all hover:bg-violet-800  bg-[#9161F8]">
                     خرید این دوره
                   </button>
                 </div>
@@ -98,6 +188,7 @@ const Product = () => {
                   <video
                     className="w-full h-full  rounded-2xl"
                     controls
+                    src={item.videoCourses}
                   ></video>
                 </div>
               </div>
@@ -106,15 +197,7 @@ const Product = () => {
                 <div className="w-80 h-fit rounded-t-2xl ">
                   <h1 className="mt-10 text-2xl sm:text-3xl ">توضیحات</h1>
                   <h1 dir="rtl" className="mt-10 sm:mt-5 sm:w-[350px] overflow-hidden  w-[800px] h-fit z-10 text-black text-2xl">
-                   {` Web API یکی از موضوعات مهم در دنیای وب است. شما به عنوان یک
-                    برنامه نویس باید با آن آشنا باشید. برخی از موضوعات مهمی که
-                    در این دوره به آن‌ها خواهیم پرداخت عبارتند از، دریافت و
-                    دستکاری داده ها از api endpoints، استفاده از تزریق وابستگی
-                    (dependency injection) داخلی، کانفیگ فایل‌ها، اتصال به
-                    دیتابیس با EF Core، امنیت و غیره. وقتی این دوره را به اتمام
-                    برسانید همه دانش لازم و اصلی برای ساخت api با asp.net core 6
-                    از ابتدا را یاد گرفته اید. برای آشنایی بهتر با این دوره،‌
-                   ${item.discriptio} پیشنهاد می کنیم ویدیو معرفی را مشاهده نمایید`}
+                  {item.discription}
                
                   </h1>
                 </div>
@@ -122,7 +205,6 @@ const Product = () => {
                 <div className="w-full h-96 mt-10 sm:mt-[450px] sm:mr-2 ">
                   {/* box1 */}
                   {/* <div className="w-full  bg-white shadow-lg rounded-3xl shadow-slate-200 h-14 "></div> */}
-
                   <ProductCategory name={item.coursePicture} />
                 </div>
               </div>

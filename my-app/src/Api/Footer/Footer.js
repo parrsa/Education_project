@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useContext} from "react";
 import Img from "../../ui-site/undraw_personal_notebook_re_d7dc 1.png";
 import Telegram from "../../ui-site/Telegram.png"
 import Instagram from '../../ui-site/Instagram.png'

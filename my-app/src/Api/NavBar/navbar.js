@@ -1,15 +1,15 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState , useEffect ,useContext } from 'react';
+import { Link ,useNavigate } from 'react-router-dom';
+import { Menu, Transition } from '@headlessui/react';
+import { click } from '@testing-library/user-event/dist/click';
+import Cookie from 'js-cookie';
+import Style from './Style.css'
+import Footer from '../Footer/Footer';
 import Logo from "../../ui-site/Student Male.png";
 import Search from '../../ui-site/Search.png';
 import Account from '../../ui-site/Verified account.png'
-import { Link } from 'react-router-dom';
-import { Menu, Transition } from '@headlessui/react';
-import Cookie from 'js-cookie';
-import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import Person from '../../ui-site/Person.png';
-import Style from './Style.css'
-import { click } from '@testing-library/user-event/dist/click';
+import P from "../../ui-site/icons8-buying-64.png";
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -22,7 +22,7 @@ const ShowDrop=()=>{
     d.style.display="none"
   })
 }
-const Navbar=()=>  {
+const Navbar=()=>{
   const [roll , SetRoll]=useState();
     const Cook= Cookie.get('TokenLogin1')
     useEffect(() => {
@@ -37,21 +37,19 @@ const Navbar=()=>  {
           });
           const data = await response.json();
           SetRoll(data)
-          console.log(roll)
+          // console.log(roll)
       };
       getDAta()
     },);
-
-
   const Navigate = useNavigate();
     return (
-      <div dir="rtl" className="w-full fixed bg-[#9161F8]  sm:z-50 md:z-50 z-10 font-KALAMEHBOLD  h-20 top-0 flex justify-between items-center">
+  <div dir="rtl" className="w-full fixed bg-[#9161F8]   sm:z-50 md:z-50 z-10 font-KALAMEHBOLD  h-20 top-0 flex justify-between items-center">
        <Link to={'/'}>
       <div   className=" w-20 sm:hidden mr-32 md:mr-0  h-20 z-10 flex  rounded-full mt-6 ">
       <img  className="w-14 cursor-pointer mr-10 h-14" src={Logo} alt="logo" />
       </div>
        </Link>  
-        <div onClick={ShowDrop} onDoubleClick={()=>{const d=document.querySelector('ul');d.style.display="none"; }} className='relative hidden -z-10 sm:left-36 sm:block left-20'>
+        <div onClick={ShowDrop} onDoubleClick={()=>{const d=document.querySelector('ul');d.style.display="none"; }} className='relative hidden -z-10 sm:left-20 sm:block  left-20'>
         <div class="space-y-2">
       <span class="block w-8 h-0.5 bg-black"></span>
       <span class="block w-8 h-0.5 bg-black"></span>
@@ -66,7 +64,7 @@ const Navbar=()=>  {
             خانه</a>
           </li>
           </Link>
-      
+
       <Link  to='/courses'> 
        <li  className="relative mr-10 sm:hover:bg-slate-100 sm:w-52 sm:-top-14 sm:-mr-14 sm:p-0 sm:mt-5 p-1.5 cursor-pointer sm:text-2xl  transition-all  hover:text-violet-800">
         <a href="../Card/">دوره ها </a>
@@ -74,13 +72,25 @@ const Navbar=()=>  {
       </Link>
 
         {Cook && <Link to='/Main'>
-         <li className="sm:mr-0 sm:p-0  p-1.5 cursor-pointer transition-all sm:text-2xl  hover:text-violet-800 "><a href="#">تدریس در سایت</a></li>
+         <li className=" sm:p-0  mr-7  sm:w-52 sm:-mt-7  sm:-mr-14  p-1.5 cursor-pointer transition-all sm:text-2xl  hover:text-violet-800 "><a href="#">تدریس در سایت</a></li>
          </Link> } {!Cook && <Link to='/Main'>
          <li className=" p-1.5 sm:hover:bg-slate-100 sm:w-52 w-56 sm:-mt-7 absolute sm:-mr-14 sm:p-0 sm:text-2xl  cursor-pointer transition-all mr-10   hover:text-violet-800 "><a href="#">تدریس در سایت</a></li>
          </Link>  }
          </ul>
-   
 
+         {/* Basket */}
+         {Cook && <Link to="/Basket">
+      <div className='cursor-pointer relative right-96 mr-56 sm:mr-0 mt-2 sm:right-7 sm:mt-2 bg-transparent  w-8 h-fit'>
+        <img className='w-full' src={P}/>
+      </div>
+         </Link>}
+         {!Cook && <Link to="/Basket">
+      <div className='cursor-pointer relative right-80 sm:right-0 sm:ml-5 bg-transparent  w-8 h-fit'>
+        <img className='w-full' src={P}/>
+      </div>
+         </Link> }
+      
+          
       {Cook==null && 
       <Link to='/Login'>
         <div className='w-32 h-2 left-40 md:-left-4 sm:-left-7 absolute '>
@@ -95,7 +105,7 @@ const Navbar=()=>  {
 
          {/* response */}
       {Cook &&
-            <Menu as="div" className="relative m-28 inline-block text-right">
+            <Menu as="div" className="relative ml-36  sm:ml-10 inline-block text-right">
       <div>
         <Menu.Button className=" w-full flex justify-center rounded-md border absolute border-gray-300 bg-violet-700 text-white px-8 -mt-4 -mr-12 py-2 text-sm font-medium ">
           پروفایل
@@ -112,7 +122,7 @@ const Navbar=()=>  {
         leaveFrom="transform opacity-100 scale-100"
         leaveTo="transform opacity-0 scale-95"
       >
-        <Menu.Items className="absolute z-10 mt-5 w-36 -mr-20  rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+        <Menu.Items className="absolute z-10 mt-5 w-36 -mr-20 sm:-mr-28 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
           <div dir='rtl' className="py-1 text-right">
 
             <Menu.Item>
@@ -125,8 +135,8 @@ const Navbar=()=>  {
                       'block w-full px-4 py-2  text-sm'
                     )}
                   >
-                   کیف پول من
-                  </button>
+                   جزئِیات حساب کاربری
+             </button>
                </Link>  
                 )}
               </Menu.Item>
@@ -142,8 +152,8 @@ const Navbar=()=>  {
                       'block w-full px-4 py-2  text-sm'
                     )}
                   >
-                   جزئِیات حساب کاربری
-                  </button>
+                  ویرایش اطلاعات
+                    </button>
                </Link>  
                 )}
               </Menu.Item>
@@ -249,6 +259,7 @@ const Navbar=()=>  {
       </Transition>
     </Menu> */}
         </div> 
+    
    
     );
     }

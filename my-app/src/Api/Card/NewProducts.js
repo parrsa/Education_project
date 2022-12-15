@@ -1,13 +1,10 @@
-import React from 'react';
-// import { Link } from 'react-router-dom';
-import { useNavigate , Link } from 'react-router-dom';
-import { useEffect ,useState } from 'react';
+import React , { useEffect ,useState } from 'react';
+import { useNavigate , Link , useLocation } from 'react-router-dom';
 import img from '../../image/3949076.png'
 import icon from "../../ui-site/Person.png";
 import icon1 from "../../ui-site/Time Machine.png";
 import icon2 from '../../image/icons8-query-30.png'
 import icon3 from '../../image/icons8-price-30.png';
-import { useLocation } from 'react-router-dom';
 const NewProducts = (props) => {
   const [items, SetItems] = useState([]);
   const [items2, SetItems2] = useState([]);
@@ -19,21 +16,13 @@ const NewProducts = (props) => {
               // "http://176.65.252.189:7007/api/Account/GetCourses"
               );
               const data = await response.json();
-            //   SetItems(data)
+              SetItems(data)
               let items2 = data
               try {
-                  SetItems([items2[0],items2[1],items2[2],items2[3]]) 
+                  SetItems([items2[0],items2[1]]) 
               } catch (error) {
               }
-              
-              if(response.status===200){
-                  console.log("object");
-                }else if(response.status===403){
-                    console.log("first")
-                }else{
-                    console.log("1");
-                }
-        
+            
                 };
                 getDAta();
   }, []); 
@@ -60,8 +49,11 @@ const NewProducts = (props) => {
       <div  className="grid grid-cols-4 sm:grid-cols-2 sm:gap-4 md:grid-cols-3 sm:mr-4  gap-8">
       {items.map((item) => (
                <div onClick={()=>navigateToProductDetail(item)} className="w-64 sm:w-[170px] h-80 sm:h-[225px] sm:shadow-md sm:shadow-[#9161F8]  sm:rounded-md rounded-xl bg-white">
-                <div className="w-64 sm:w-[170px]  h-40 sm:h-[100px] sm:rounded-md rounded-xl   ">
-                  <img alt="img" className="rounded-xl  sm:w-full  sm:h-[100px] h-40" src={img}/>
+                <div className="w-64 sm:w-[170px]  h-40 sm:h-[100px] sm:rounded-md rounded-xl ">
+                {/* <div>{item.coursePicture.replace('~',"192.168.1.2:7007")}</div> */}
+                  <img alt="img" className="rounded-xl w-full  sm:w-full  sm:h-[100px] h-40" src={item.coursePicture.replace('~',"http://192.168.1.2:7007")}/>
+                  {/* .replace('~',"192.168.1.2:7007") */}
+                  {/* item.coursePicture.replace('~',"192.168.1.2:7007") */}
                 </div>
                 <div dir="rtl" className="flex relative  w-64 h-64 sm:bottom-3  rounded-xl justify-center items-center ">
                   <h1 className="absolute top-5 text-center sm:-mr-20  ">{item.name}</h1>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link, useLocation, useNavigate , Routes , Route } from "react-router-dom";
+import Cookie from 'js-cookie'
+import Footer from "../Footer/Footer";
 import Navbar from "../NavBar/Navbar";
 import img from "../../image/3949076.png";
 import icon from "../../ui-site/Person.png";
@@ -7,15 +9,11 @@ import icon1 from "../../ui-site/Time Machine.png";
 import icon2 from "../../image/icons8-query-30.png";
 import icon3 from "../../image/icons8-price-30.png";
 import logo from "../../image/icons8-course-32.png";
-import Footer from "../Footer/Footer";
-import Cookie from 'js-cookie'
 const Cards=()=> {
   const [item, SetItems] = useState([]); 
-
   const [search, setSearch] = useState("")
   const location = useLocation();
-
-   const navigate = useNavigate();
+  const navigate = useNavigate();
   const navigateToProductDetail = (item) => {
     navigate("/Pro", { state: { item } });
   };
@@ -44,6 +42,109 @@ const Cards=()=> {
     getDAta()
   }, [location]);
     const SearchC=item.filter(product => product.name.toLowerCase() .includes(search.toLocaleLowerCase().slice(0,6)));
+
+
+
+    // const separate = (Number)=> 
+    // {
+
+    //   const Number_sring = Number.toString();
+    //   const n = Number_sring.length;
+    //   let i = 1
+    //   let output = ''
+    //   while(i<n){
+    //     d = 10;
+    //     j=1;
+    //     while(j<i){
+    //       d= d*d
+    //       j+=1
+    //     }
+    //     let temp = Number%d
+    //     output = output + temp
+    //     i++;
+    //   }
+    // }
+
+    // const separate = (Number)=> 
+    // {
+    //   // return Number;
+    //   // alert(typeof (Number/10))
+    //   console.log((Number/10))
+    //   const Number_sring = Number.toString();
+    //   const n = Number_sring.length;
+      
+    //   // let i = 1
+    //   let output = ''
+    //   for (let index = 1; index < n+1; index++) {
+    //     let temp = Number%10;
+    //     // let x = Math.floor(2.3);
+    //     Number = Number/10;
+    //     if (index%3 === 0 && index !==n){
+    //       output = output +temp.toString() +','
+    //     }else{
+    //       output = output + temp.toString()
+    //     }
+    //   }
+    //   return output.split('').reverse().join('');
+    //   // while(i<n){
+    //   //   d = 10;
+    //   //   j=1;
+    //   //   while(j<i){
+    //   //     d= d*d
+    //   //     j+=1
+    //   //   }
+    //   //   let temp = Number%d
+    //   //   output = output + temp
+    //   //   i++;
+    //   // }
+    // }
+    const separate = (Number)=> 
+    {
+      // return Number;
+      // alert(typeof (Number/10))
+      // console.log((Number/10))
+      // const Number_sring = Number.toString();
+      let fraction =''
+
+      if(Number.split('.').length>1){
+
+        fraction = "/" + Number.split('.')[1]
+      }else{
+
+        // fraction = '/0'
+      }
+
+      Number = Number.split('.')[0]
+
+      const n = Number.length;
+      // let i = 1
+      let output = ''
+      Number = Number.split('').reverse().join('')
+      for (let index = 1; index < n+1; index++) {
+        // let temp = Number%10;
+        // let x = Math.floor(2.3);
+        // Number = Number/10;
+        let temp = Number.charAt(index-1)
+        if (index%3 === 0 && index !==n){
+          output = output + temp +','
+        }else{
+          output = output + temp
+        }
+      }
+      return output.split('').reverse().join('')+fraction;
+      // while(i<n){
+      //   d = 10;
+      //   j=1;
+      //   while(j<i){
+      //     d= d*d
+      //     j+=1
+      //   }
+      //   let temp = Number%d
+      //   output = output + temp
+      //   i++;
+      // }
+    }
+
   return (
     <>
       <Navbar />
@@ -65,10 +166,10 @@ const Cards=()=> {
         <div className="flex  justify-evenly mr-5 md:-mr-4 sm:-mr-5 ">
           <div className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-4 sm:mr-4  gap-8">
           
-            {SearchC.map((item) => item <= 3  ( 
+            {SearchC.map((item) => ( 
                <div onClick={()=>navigateToProductDetail(item)} className="w-64 sm:w-[170px] h-80 sm:h-[225px] sm:shadow-md sm:shadow-[#9161F8]  sm:rounded-md rounded-xl bg-white shadow-md">
                 <div className="w-64 sm:w-[170px]  h-40 sm:h-[100px] sm:rounded-md rounded-xl   ">
-                  <img alt="img" className="rounded-xl  sm:w-full  sm:h-[100px] h-40" src={img}/>
+                  <img alt="img" className="rounded-xl w-full sm:w-full  sm:h-[100px] h-40"  src={item.coursePicture.replace('~',"http://192.168.1.2:7007")} />
                 </div>
                 <div dir="rtl" className="flex relative  w-64 h-64 sm:bottom-3    rounded-xl justify-center items-center ">
                   <h1 className="absolute top-5 text-center sm:-mr-20  ">{item.name}</h1>
@@ -87,11 +188,11 @@ const Cards=()=> {
                   </h5>
                   <h5 className="absolute  sm:ml-[75px] sm:mb-12 ">
                     <span className=" w-48 absolute mr-8 sm:mr-0  text-sm">
-                      {` ${item.price}تومان`}
+                      {/* {` ${item.price} تومان`} */}
+                      {` ${separate(item.price)} تومان`}
                     </span>{" "}
                   </h5>
                 </div>
-
               </div>
             ))}
           </div>

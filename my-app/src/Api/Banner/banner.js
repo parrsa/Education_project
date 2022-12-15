@@ -1,21 +1,17 @@
-import React from "react";
+import React , {useState , useEffect} from "react";
+import { useNavigate } from "react-router-dom";
 import BannerImage from "../../ui-site/undraw_education_f8ru 1.png";
 import Time from "../../ui-site/Time.png";
 import Money from '../../ui-site/Money.png'
 import Support from "../../ui-site/Technical Support.png";
 import Certificate from '../../ui-site/Certificate.png';
 import Search from '../../ui-site/Search.png';
-import { useState } from "react";
-import { useEffect } from "react";
 import Cookie from 'cookie'
-import { useNavigate } from "react-router-dom";
 const Banner = () => {
   const [SearchValue,SetSearch]=useState("");
   const SetValue=(e)=>{
     SetSearch(e.target.value);
   }
-
-  
     const navigate = useNavigate();
     useEffect(()=>{
       navigate('' , {state : {SearchValue}})

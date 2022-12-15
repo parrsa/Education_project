@@ -141,7 +141,6 @@ function LoginTeacher() {
             .then(async response => {
               const isJson = response.headers.get('content-type')?.includes('application/json');
               const data = isJson && await response.json();
-      
               // check for error response
               console.log(data);
               localStorage.setItem('TokenTeacher',JSON.stringify(data.token))

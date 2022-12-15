@@ -1,9 +1,9 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "../Footer/Footer";
 import FooterTop from "../Footer/FooterTop";
 import Navbar from "../NavBar/Navbar";
 import ImgBanner from '../../ui-site/undraw_educator_re_ju47 1.png'
-import { useNavigate } from "react-router-dom";
 const Main = () => {
     const Navigate=useNavigate();
     const Handeler=()=>{

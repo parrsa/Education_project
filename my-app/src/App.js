@@ -7,6 +7,7 @@ import SignIn from './Api/Membership/Register'
 import MainTeacher from './Api/RegisterTeacher/Main'
 import RegisterTeacher from './Api/RegisterTeacher/Register'
 import Pro from './Api/Product/Product'
+import Basket from './Api/Basket/Basket';
 import { Route,Router,Routes } from 'react-router-dom';
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
         <Route path='/Main' element={<MainTeacher/>}/>
         <Route path='/Register-Teacher' element={<RegisterTeacher/>}/>
         <Route path='/Pro' element={<Pro/>}/>
+        <Route path='/Basket' element={<Basket/>}></Route>
       </Routes>
     </div>
   )

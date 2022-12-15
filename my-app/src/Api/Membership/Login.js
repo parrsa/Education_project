@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import {Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Cookies from "js-cookie";
 import FooterTop from "../Footer/FooterTop";
 import Footer from "../Footer/Footer";
@@ -23,95 +24,120 @@ const Main = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ Mobile: Phone, Password: Password }),
     };
-      fetch("http://192.168.1.2:7007/api/Account/Login", requestOptions)
-      .then(async (response)=>{
-        
-        const isJson = response.headers .get('Content-Type') ?.includes("application/json");
+    fetch("http://192.168.1.2:7007/api/Account/Login", requestOptions)
+      .then(async (response) => {
+
+        const isJson = response.headers.get('Content-Type')?.includes("application/json");
         const data = isJson && (await response.json()); console.log(data)
         if (response.status === 200) {
-          Cookies.set('TokenLogin1' , data.token ,{
-            expires: 0.20/24,
-        secure: true,
-        sameSite:'strict',
-        path:'/'
+          Cookies.set('TokenLogin1', data.token, {
+            expires: 0.20 / 24,
+            secure: true,
+            sameSite: 'strict',
+            path: '/',
           })
           NavigateParsa('/')
         }
       })
-    }
+  }
   // End-Login-api
 
-    // Start-Api
-  const [Name,setName]=useState("");
-  function SendName(e){
+  // Start-Api
+  const [Name, setName] = useState("");
+  function SendName(e) {
     setName(e.target.value)
   };
 
-// ----------------------------------
-    const [Family,setFamily]=useState('');
-    function SendFamily(e){
-      setFamily(e.target.value)
-    }
-// ----------------------------------
-    const [Email,SetEmail]=useState("");
-    function SendEmail(e){
+  // ----------------------------------
+  const [Family, setFamily] = useState('');
+  function SendFamily(e) {
+    setFamily(e.target.value)
+  }
+  // ----------------------------------
+  const [Email, SetEmail] = useState("");
+  function SendEmail(e) {
     SetEmail(e.target.value)
   }
-// ----------------------------------
-    const [Mobile,setMobile]=useState("");
-    function SendPhone(e){
+  // ----------------------------------
+  const [Mobile, setMobile] = useState("");
+  function SendPhone(e) {
     setMobile(e.target.value)
   }
-// ----------------------------------
-    const [Passwod,setPassword]=useState("");
-    function SendPass(e){
+  // ----------------------------------
+  const [Passwod, setPassword] = useState("");
+  function SendPass(e) {
     setPassword(e.target.value)
   }
-// ----------------------------------
-    const [Confirm,setConfirm]=useState("");
-    function SendConfirm(e){
+  // ----------------------------------
+  const [Confirm, setConfirm] = useState("");
+  function SendConfirm(e) {
     setConfirm(e.target.value)
   }
-// ----------------------------------
-    const [City,setCity]=useState("");
-    function SendCity(e){
-    setCity(e.target.value)
+  // ----------------------------------
+  const [SelectCity, SetSelectCity] = useState("");
+  const SendCity = (item) => {
+    SetSelectCity(item.id)
   }
-// ----------------------------------
-    const [State,setState]=useState("");
-    function SendState(e){
-    setState(e.target.value)
-  }
-// ----------------------------------
-    function CreateUser(){
-      const requestOptions = {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ 
-                      Name:Name,
-                      Family:Family,
-                      Email:Email,
-                      Mobile:Mobile,
-                      Password:Passwod,
-                      ConfirmPassword:Confirm,
-                      State:State,
-                      City:City,
-        })
+  console.log(SelectCity)
+  // ---------------- ------------------
+
+  function CreateUser() {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        Name: Name,
+        Family: Family,
+        Email: Email,
+        Mobile: Mobile,
+        Password: Passwod,
+        ConfirmPassword: Confirm,
+        cityId: SelectCity,
+      })
     };
     fetch('http://192.168.1.2:7007/api/Account/Register', requestOptions)
-        .then(async response => {
-            const isJson = response.headers.get('content-type')?.includes('application/json');
-            const data = isJson && await response.json();
+      .then(async (response) => {
+        const isJson = response.headers.get('Content-Type')?.includes("application/json");
+        const data = isJson && (await response.json());
+        console.log(data)
+        if (response.status === 200) {
+          Cookies.set('TokenRegister', data.token, {
+            expires: 0.20 / 24,
+            secure: true,
+            sameSite: 'strict',
+            path: '/',
+          })
+        }
+      })
+    console.error('There was an error!');
+  }
 
-            // check for error response
-            if (response.ok) {
-            alert('تایید')
-            }
-        })
-        .catch(error => {
-            console.error('There was an error!', error);
-        });
-}
+  const [State, SetState] = useState()
+  
+  useEffect(() => {
+    const getData = async () => {
+      const response = await fetch
+        ('http://192.168.1.2:7007/api/Account/GetStates');
+      const data = await response.json();
+      SetState(data)
+      if(data.length>0){
+        CreateSelectbox(data[0].id);
+      }
+    }
+    getData();
+  }, []);
+
+
+  const [City, SetCity] = useState([]);
+  const CreateSelectbox = async (id) => {
+    // alert(item.name)
+    const res = await fetch(`http://192.168.1.2:7007/api/Account/GetCities/${id}`)
+    const data = await res.json();
+    SetCity(data)
+    // alert('parsa')
+  }
+
+
 
   return (
     <div>
@@ -198,30 +224,30 @@ const Main = () => {
                         </label>
                         <input
                           type={"text"}
-                             value={Name}
-                             onChange={SendName}
+                          value={Name}
+                          onChange={SendName}
                           className="block w-11/12 mt-1 px-2   bg-white border rounded-md focus:border-purple-800
                         focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                       </div>
                       <div className="mr-10">
-                     <label for="fname" class="mt-10 xt-gray-900 ">
-                       نام خانوادگی
-                     </label>
-                     <input
-                     value={Family}
-                     onChange={SendFamily}
-                       type={"text"}
-                       className="block w-11/12 mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                     />
-                   </div>
+                        <label for="fname" class="mt-10 xt-gray-900 ">
+                          نام خانوادگی
+                        </label>
+                        <input
+                          value={Family}
+                          onChange={SendFamily}
+                          type={"text"}
+                          className="block w-11/12 mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                        />
+                      </div>
                       <div className="mr-10">
                         <label for="mobile" class="mt-10 text-gray-900 ">
                           شماره موبایل
                         </label>
                         <input
-                           value={Mobile}
-                        onChange={SendPhone}
+                          value={Mobile}
+                          onChange={SendPhone}
                           type={"number"}
                           className="block w-11/12 mt-1 px-2   bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
@@ -244,7 +270,7 @@ const Main = () => {
                         <input
                           type={"password"}
                           value={Passwod}
-                          onChange={SendPass}   
+                          onChange={SendPass}
                           className="block w-11/12 mt-1 px-2   bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                       </div>
@@ -254,35 +280,50 @@ const Main = () => {
                         </label>
                         <input
                           type={"password"}
-                             value={Confirm}
-                             onChange={SendConfirm}
+                          value={Confirm}
+                          onChange={SendConfirm}
                           className="block w-11/12 mt-1 px-2    bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                         />
                       </div>
-                     
+
                       <div className="flex">
+
                         <div className="mr-10">
-                          <label for="password" class="mt-10 text-gray-900 ">
-                            استان
-                          </label>
-                          <input
-                            type={"password"}
-                            value={State}
-                            onChange={SendState}
-                            className="block w-11/12 mt-1 px-2    bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                          />
+                          <form>
+                            <label for="password" class="mt-10 text-gray-900 ">
+                              استان
+                            </label>
+
+                            <select onChange={(event)=>{CreateSelectbox(event.target.value)}} className=" block full mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                              {State.map(item => (
+                                <option value={item.id} >
+                                  {item.name}
+                                </option>
+                              ))}
+                            </select>
+
+                          </form>
                         </div>
                         <div className="mr-10">
                           <label for="password" class="mt-10 text-gray-900 ">
                             شهرستان
                           </label>
-                          <input
-                            type={"password"}
-                            value={City}
-                              onChange={SendCity}
-                            className="block w-11/12 mt-1 px-2    bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
-                          />
+                          <select onChange={(event)=>{}} className=" block full mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                              {City.map(item => (
+                                <option value={item.id} >
+                                  {item.name}
+                                </option>
+                              ))}
+                            </select>
+                          {/* <select
+                            className="block w-full mt-1 px-2 bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
+                          >
+                            {City.map((item) => (
+                              <option onClick={() => SendCity(item)}  >{item.name}</option>
+                            ))}
+                          </select> */}
                         </div>
+
                       </div>
                     </div>
                     <div className="mr-10 mt-10 md:-mt-0">

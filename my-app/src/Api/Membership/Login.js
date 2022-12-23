@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
+import cookie from "cookie";
 import Cookies from "js-cookie";
 import FooterTop from "../Footer/FooterTop";
 import Footer from "../Footer/Footer";
 import Navbar from "../NavBar/Navbar";
 import BannerImage from "../../ui-site/undraw_reading_time_re_phf7 1.png";
-import cookie from "cookie";
 const Main = () => {
   const [Count, SetCount] = useState(1);
   const [Phone, SetPhone] = useState("");
@@ -75,10 +75,9 @@ const Main = () => {
   }
   // ----------------------------------
   const [SelectCity, SetSelectCity] = useState("");
-  const SendCity = (item) => {
-    SetSelectCity(item.id)
+  const SendCity = (id) => {
+    SetSelectCity(id)
   }
-  console.log(SelectCity)
   // ---------------- ------------------
 
   function CreateUser() {
@@ -99,7 +98,6 @@ const Main = () => {
       .then(async (response) => {
         const isJson = response.headers.get('Content-Type')?.includes("application/json");
         const data = isJson && (await response.json());
-        console.log(data)
         if (response.status === 200) {
           Cookies.set('TokenRegister', data.token, {
             expires: 0.20 / 24,
@@ -107,6 +105,7 @@ const Main = () => {
             sameSite: 'strict',
             path: '/',
           })
+          NavigateParsa('/')
         }
       })
     console.error('There was an error!');
@@ -136,9 +135,6 @@ const Main = () => {
     SetCity(data)
     // alert('parsa')
   }
-
-
-
   return (
     <div>
       <Navbar />
@@ -154,7 +150,7 @@ const Main = () => {
             </div>
             {Count === 1 && (
               <div className="col-span-1 flex  justify-center mt-52  row-span-2 sm:row-span-2 sm:col-span-2">
-                <div className="w-[55%] md:w-[75%] md:left-5 md:-mt-10 relative sm:w-[95%] h-[75%] md:h-[85%] rounded-xl overflow-hidden shadow-lg shadow-violet-800  bg-white">
+                <div className="w-[55%] md:w-[75%] md:left-5 md:-mt-10 relative sm:w-[95%] h-[75%] sm:h-[60%] md:h-[85%] rounded-xl overflow-hidden shadow-lg shadow-violet-800  bg-white">
                   <h1 className="text-center text-2xl mt-3">ورود</h1>
                   <div dir="rtl" className="text-lg">
                     <div>
@@ -308,7 +304,7 @@ const Main = () => {
                           <label for="password" class="mt-10 text-gray-900 ">
                             شهرستان
                           </label>
-                          <select onChange={(event)=>{}} className=" block full mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                          <select onChange={(event)=>{SendCity(event.target.value)}} className=" block full mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
                               {City.map(item => (
                                 <option value={item.id} >
                                   {item.name}

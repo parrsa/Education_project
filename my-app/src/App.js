@@ -8,7 +8,7 @@ import MainTeacher from './Api/RegisterTeacher/Main'
 import RegisterTeacher from './Api/RegisterTeacher/Register'
 import Pro from './Api/Product/Product'
 import Basket from './Api/Basket/Basket';
-import { Route,Router,Routes } from 'react-router-dom';
+import { Route,Router,Routes} from 'react-router-dom';
 const App = () => {
   return (
     <div className='' >
@@ -21,6 +21,7 @@ const App = () => {
         <Route path='/Register-Teacher' element={<RegisterTeacher/>}/>
         <Route path='/Pro' element={<Pro/>}/>
         <Route path='/Basket' element={<Basket/>}></Route>
+        <Route path='*' element={<Home/>}/>
       </Routes>
     </div>
   )

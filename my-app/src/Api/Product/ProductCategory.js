@@ -10,10 +10,10 @@ const {name}=props;
     <div>
           <Menu
                     as="div"
-                    className="relative w-full  shadow-lg rounded-3xl   inline-block text-right"
+                    className="relative w-full  rounded-3xl   inline-block text-right"
                   >
                     <div>
-                      <Menu.Button dir='rtl' className="w-full  bg-white shadow-lg rounded-3xl shadow-slate-200 h-14">
+                      <Menu.Button dir='rtl' className="w-10/12 bg-white mt-2 rounded-xl  h-12">
                       <p className='text-right mr-10'>
                         فصل اول
                       </p>
@@ -23,7 +23,7 @@ const {name}=props;
 
                     <Transition
                       as={Fragment}
-                      enter="transition ease-out duration-100"
+                      enter="transition ease-out duration-100" 
                       enterFrom="transform opacity-0 scale-95"
                       enterTo="transform opacity-100 scale-100"
                       leave="transition ease-in duration-75"
@@ -33,7 +33,7 @@ const {name}=props;
                       <Menu.Items className="absolute w-full">
                         <div dir="rtl" className="py-1  text-right">
                           <Menu.Item>
-                            {({ active }) => (
+                           {({ active }) => (
                               <Link to="/Login">
                                 <div
                                   type="submit"
@@ -41,7 +41,7 @@ const {name}=props;
                                     active
                                       ? "bg-gray-100 text-gray-900"
                                       : "text-gray-700",
-                                    "block w-full px-4 py-2   text-sm border-b-2 border-dashed border-black"
+                                    "block w-10/12 px-4 py-2   text-sm border-b-2 border-dashed border-black"
                                   )}
                                 >
                                 {name}

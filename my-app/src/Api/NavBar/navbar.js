@@ -10,6 +10,7 @@ import Search from '../../ui-site/Search.png';
 import Account from '../../ui-site/Verified account.png'
 import Person from '../../ui-site/Person.png';
 import P from "../../ui-site/icons8-buying-64.png";
+import { redirect } from 'react-router-dom';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -37,7 +38,6 @@ const Navbar=()=>{
           });
           const data = await response.json();
           SetRoll(data)
-          // console.log(roll)
       };
       getDAta()
     },);
@@ -80,12 +80,12 @@ const Navbar=()=>{
 
          {/* Basket */}
          {Cook && <Link to="/Basket">
-      <div className='cursor-pointer relative right-96 mr-56 sm:mr-0 mt-2 sm:right-7 sm:mt-2 bg-transparent  w-8 h-fit'>
+      <div className='cursor-pointer relative md:mr-0 md:right-56 right-96 mr-56 sm:mr-0 mt-2 sm:right-7 sm:mt-2 bg-transparent  w-8 h-fit'>
         <img className='w-full' src={P}/>
       </div>
          </Link>}
          {!Cook && <Link to="/Basket">
-      <div className='cursor-pointer relative right-80 sm:right-0 sm:ml-5 bg-transparent  w-8 h-fit'>
+      <div className='cursor-pointer relative right-80 md:right-44 sm:right-0 sm:ml-5 bg-transparent  w-8 h-fit'>
         <img className='w-full' src={P}/>
       </div>
          </Link> }
@@ -195,69 +195,7 @@ const Navbar=()=>{
       </Transition>
     </Menu>
          }
-          {/* Login */}
-      {/* <Menu dir='rtl' as="div" className="absolute text-center transition-all mr-14 hidden sm:inline-block">
-      <div>
-        <Menu.Button className=" w-full flex  justify-center rounded-md  absolute  text-white px-8 -mt-4 -mr-12 py-2  ">
-        <div class="space-y-1.5">
-        <div class="w-8 h-0.5 bg-black"></div>
-        <div class="w-8 h-0.5 bg-black"></div>
-        <div class="w-8 h-0.5 bg-black"></div>
-        </div>
-        </Menu.Button>
-      </div>
 
-      <Transition
-        as={Fragment}
-        enter="transition ease-out duration-100"
-        enterFrom="transform opacity-0 scale-95"
-        enterTo="transform opacity-100 scale-100"
-        leave="transition ease-in duration-75"
-        leaveFrom="transform opacity-100 scale-100"
-        leaveTo="transform opacity-0 scale-95"
-      >
-        <Menu.Items className="absolute  z-10 mt-5 w-72 h-screen -mr-14 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-          <div dir='rtl' className="py-1">
-
-            <Menu.Item>
-                {({ active }) => (
-               <Link to='/app'>
-                <li
-                    type="submit"
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block w-full px-4 py-2  text-xl'
-                    )}
-                  >
-                خانه
-                  </li>
-               </Link>  
-                )}
-              </Menu.Item>
-
-
-              <Menu.Item>
-                {({ active }) => (
-               <Link to='/courses'>
-                <li
-                    type="submit"
-                    className={classNames(
-                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                      'block w-full px-4 py-2  text-xl'
-                    )}
-                  >
-               دوره ها
-                  </li>
-               </Link>  
-                )}
-              </Menu.Item>
-
-
-
-          </div>
-        </Menu.Items>
-      </Transition>
-    </Menu> */}
         </div> 
     
    

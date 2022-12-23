@@ -16,7 +16,6 @@ import FooterTop from '../Footer/FooterTop';
          <BannerBootm/>
          <FooterTop/>
          <Footer/>
-        
       </div>
     );
   }

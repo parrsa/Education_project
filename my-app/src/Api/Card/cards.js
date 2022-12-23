@@ -12,8 +12,10 @@ import logo from "../../image/icons8-course-32.png";
 const Cards=()=> {
   const [item, SetItems] = useState([]); 
   const [search, setSearch] = useState("")
+  
   const location = useLocation();
   const navigate = useNavigate();
+
   const navigateToProductDetail = (item) => {
     navigate("/Pro", { state: { item } });
   };
@@ -24,7 +26,6 @@ const Cards=()=> {
           "http://192.168.1.2:7007/api/Account/GetCourses"
           // "http://176.65.252.189:7007/api/Account/GetCourses"
         );
-
         const data = await response.json();
         SetItems(data)
           // console.log(SetItems)
@@ -41,63 +42,7 @@ const Cards=()=> {
     };
     getDAta()
   }, [location]);
-    const SearchC=item.filter(product => product.name.toLowerCase() .includes(search.toLocaleLowerCase().slice(0,6)));
-
-
-
-    // const separate = (Number)=> 
-    // {
-
-    //   const Number_sring = Number.toString();
-    //   const n = Number_sring.length;
-    //   let i = 1
-    //   let output = ''
-    //   while(i<n){
-    //     d = 10;
-    //     j=1;
-    //     while(j<i){
-    //       d= d*d
-    //       j+=1
-    //     }
-    //     let temp = Number%d
-    //     output = output + temp
-    //     i++;
-    //   }
-    // }
-
-    // const separate = (Number)=> 
-    // {
-    //   // return Number;
-    //   // alert(typeof (Number/10))
-    //   console.log((Number/10))
-    //   const Number_sring = Number.toString();
-    //   const n = Number_sring.length;
-      
-    //   // let i = 1
-    //   let output = ''
-    //   for (let index = 1; index < n+1; index++) {
-    //     let temp = Number%10;
-    //     // let x = Math.floor(2.3);
-    //     Number = Number/10;
-    //     if (index%3 === 0 && index !==n){
-    //       output = output +temp.toString() +','
-    //     }else{
-    //       output = output + temp.toString()
-    //     }
-    //   }
-    //   return output.split('').reverse().join('');
-    //   // while(i<n){
-    //   //   d = 10;
-    //   //   j=1;
-    //   //   while(j<i){
-    //   //     d= d*d
-    //   //     j+=1
-    //   //   }
-    //   //   let temp = Number%d
-    //   //   output = output + temp
-    //   //   i++;
-    //   // }
-    // }
+    const SearchC=item.filter(product => product.name.toLowerCase() .includes(search.toLocaleLowerCase().slice(0,8)));
     const separate = (Number)=> 
     {
       // return Number;
@@ -132,17 +77,6 @@ const Cards=()=> {
         }
       }
       return output.split('').reverse().join('')+fraction;
-      // while(i<n){
-      //   d = 10;
-      //   j=1;
-      //   while(j<i){
-      //     d= d*d
-      //     j+=1
-      //   }
-      //   let temp = Number%d
-      //   output = output + temp
-      //   i++;
-      // }
     }
 
   return (

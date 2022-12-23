@@ -1,7 +1,9 @@
 import React, { useState, useEffect, Fragment } from "react";
 import { useLocation, Link } from "react-router-dom";
 import { Menu, Transition } from "@headlessui/react";
+import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
+import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
 import Navbar from "../NavBar/Navbar";
 import FooterTop from "../Footer/FooterTop";
@@ -10,8 +12,7 @@ import Profile from "../../ui-site/Profile.png";
 import Time from "../../ui-site/Time Circle.png";
 import Video from "../../ui-site/Video.png";
 import ProductCategory from "./ProductCategory";
-import Cookie from 'js-cookie';
-import { useNavigate } from "react-router-dom";
+import Comment from "./Comment";
 const Product = () => {
  const navigate=useNavigate();
  const Cook= Cookie.get('TokenLogin1')
@@ -119,15 +120,14 @@ navigate('/login')
     <>
       <div>
         <Navbar />
-        <div className="w-full mt-20 h-fit font-KALAMEHBOLD bg-[#EFEFEF] ">
+        <div className="w-full mt-20 h-ful  font-KALAMEHBOLD bg-[#EFEFEF] ">
           <div className="grid grid-cols-3 sm:grid-rows-2">
-            <div className="col-span-1 sm:mt-[650px] sm:top-80 mt-5 sm:col-span-3 flex justify-center relative">
-              <div className=" w-[330px] sm:relative  h-[400px] sm:z-10  flex justify-center border border-black relative top-10 rounded-2xl">
+            <div className="col-span-1 sm:mt-[700px] sm:top-80 mt-5 sm:col-span-3 flex justify-center relative">
+              <div className=" w-[330px] sm:relative h-[400px]  sm:z-10 flex justify-center  border border-black relative top-10 rounded-2xl">
                 <button className="w-28 text-white rounded-lg mt-8 h-8 transition-all hover:bg-violet-800 bg-[#9161F8]">
                   اطلاعات دوره
                 </button>
-
-                <div className="w-80 h-44  top-20 absolute flex justify-center">
+                <div className="w-80 h-44 top-20 absolute flex justify-center">
                   <div className="w-14 h-14 m-6 rounded-full flex justify-center border border-black">
                     <img className="w-8 h-8 mt-2" alt="icon" src={Video} />
                     <p className="absolute mt-14   text-gray-700 text-sm">
@@ -192,20 +192,17 @@ navigate('/login')
                   ></video>
                 </div>
               </div>
-
               <div className="mt-20 mr-20  rounded-2xl mb-10 sm:mt-10 sm:mr-5 sm:row-span-1 w-10/12 h-fit">
                 <div className="w-80 h-fit rounded-t-2xl ">
                   <h1 className="mt-10 text-2xl sm:text-3xl ">توضیحات</h1>
                   <h1 dir="rtl" className="mt-10 sm:mt-5 sm:w-[350px] overflow-hidden  w-[800px] h-fit z-10 text-black text-2xl">
                   {item.discription}
-               
                   </h1>
                 </div>
-
-                <div className="w-full h-96 mt-10 sm:mt-[450px] sm:mr-2 ">
+                <div className="w-full h-96 sm:h-fit   mt-10  sm:mr-2 ">
                   {/* box1 */}
                   {/* <div className="w-full  bg-white shadow-lg rounded-3xl shadow-slate-200 h-14 "></div> */}
-                  <ProductCategory name={item.coursePicture} />
+                  <ProductCategory  name={item.coursePicture} />
                 </div>
               </div>
             </div>
@@ -217,5 +214,4 @@ navigate('/login')
     </>
   );
 };
-
 export default Product;

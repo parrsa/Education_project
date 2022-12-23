@@ -76,7 +76,7 @@ const NewProducts = () => {
                   </h5>
                   <h5 className="absolute  sm:ml-[75px] sm:mb-12 ">
                     <span className=" w-48 absolute mr-8 sm:mr-0  text-sm">
-                      {` ${item.price}تومان`}
+                      {` ${item.price}ریال`}
                     </span>{" "}
                   </h5>
                 </div>

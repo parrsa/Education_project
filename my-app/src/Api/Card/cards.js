@@ -23,7 +23,7 @@ const Cards=()=> {
   useEffect(() => {
     const getDAta = async () => {
         const response = await fetch(
-          "http://192.168.1.2:7007/api/Account/GetCourses"
+           "http://192.168.1.2:7007/api/Account/GetCourses"
           // "http://176.65.252.189:7007/api/Account/GetCourses"
         );
         const data = await response.json();
@@ -82,9 +82,8 @@ const Cards=()=> {
   return (
     <>
       <Navbar />
-      <div dir="rtl" className="w-full flex justify-center  font-KALAMEHBOLD mb-20 mt-20 sm:mt-5 h-fit">
+      <div dir="rtl" className="w-full flex justify-center font-KALAMEHBOLD mb-20 mt-20 sm:mt-5 h-fit">
         <div className="w-11/12  h-fit">
-
         <div className="w-full flex justify-between items-center  h-24">
           <h1 className="font-bold  text-xl sm:text-base sm:font-bold relative sm:mr-3 mr-32 md:mr-3">
             <span className="text-[#9161F8] ml-2 ">- - - - - -</span>

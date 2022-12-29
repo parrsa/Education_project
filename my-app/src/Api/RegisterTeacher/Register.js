@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import Cookies from 'js-cookie'
 import Upload from "../../ui-site/Upload1.png";
 import BannerImage from '../../ui-site/undraw_reading_time_re_phf7 1.png'
+import Swal from 'sweetalert2';
+
 const Register = () => {
   const [Count, SetCount] = useState(1);
   const Navigate = useNavigate();
@@ -96,9 +98,6 @@ const Register = () => {
           .get("content-type")
           ?.includes("application/json");
         const data = isJson && (await response.json());
-
-        // check for error response
-        console.log(data);
         if (response.ok) {
           Cookies.set('TokenRegisterTeacher' , data.token ,{
             expires: 0.10/24,
@@ -107,9 +106,19 @@ const Register = () => {
         path:'/'
           })
         Navigate('/')
-        } else {
-          return alert("خطا در ثبت");
-        }
+        }  
+        console.log(data);
+        // else if (!response.ok){
+        //   Swal.fire(
+        //     {
+        //     position: 'top-end',
+        //     icon: 'error',
+        //     text: data.message,
+        //     showConfirmButton: false,
+        //     timer: 1500
+        //   }
+        //   )
+        // }
       })
       .catch((error) => console.log("sooooo", error));
   }

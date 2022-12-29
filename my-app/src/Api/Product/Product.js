@@ -21,13 +21,16 @@ const Product = () => {
   }
   const { state } = useLocation();
   const [item, setItem] = useState({});
+  const St=state.item.id;
   useEffect(() => {
+    console.log(state.item.id);
     const getDAta = async () => {
       setItem(state.item);
       const response = await fetch(`http://192.168.1.2:7007/api/Account/GetCourse/${state.item.id}`
       );
       const data = await response.json();
       setItem(data);
+      // console.log(data)
     };
     getDAta();
   }, []);
@@ -51,6 +54,7 @@ const Product = () => {
 // }
 const Swal = require('sweetalert2')
 const CreateUser = async () => {
+  
   if(Cook){
     const response = await fetch(`http://192.168.1.2:7007/api/Basket/AddBasket`,{
     method: 'POST',
@@ -72,7 +76,12 @@ Swal.fire({
   text: 'دوره به سبد خرید افزوده شد',
   showConfirmButton: false,
   timer: 1500
-})
+},
+setTimeout(()=>{
+  navigate("//",{state:{St}})
+},1600)
+
+)
   }
   else{
     Swal.fire(
@@ -98,7 +107,6 @@ navigate('/login')
     },2000)
     
   }
-  
 };
 
 // const Click= ()=>{

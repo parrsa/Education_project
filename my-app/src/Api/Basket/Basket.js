@@ -1,5 +1,6 @@
 import React , {useEffect , useState} from 'react'
 import { json, useNavigate } from 'react-router-dom'
+import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Footer from '../Footer/Footer'
 import FooterTop from '../Footer/FooterTop'
@@ -10,11 +11,13 @@ import Remove from '../../ui-site/icons8-remove-48.png'
 import Payment from "../../ui-site/icons8-pay-30.png"
 const Basket = () => {
 const Swal = require('sweetalert2')
-    const Cook=Cookie.get('TokenLogin1')
-  const [Product , setProduct]=useState([])
-  const navigate=useNavigate();
+const Cook=Cookie.get('TokenLogin1')
+const [Product , setProduct]=useState([])
+// console.log(Product);
+const navigate=useNavigate();
+const { state } = useLocation();
+
   const Deletuser= async(item)=>{
-   
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -28,7 +31,7 @@ const Swal = require('sweetalert2')
       if (result.isConfirmed) {
         const response =  fetch(`http://192.168.1.2:7007/api/Basket/DeleteBasket`,{
           method: 'POST',
-          body:  item.userCourse.courseId ,
+          body:  item.courseId ,
          headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -61,7 +64,6 @@ const Swal = require('sweetalert2')
     }
     GetData()
   },[Deletuser]);
-  
   let Price = Product.reduce((acc,cur) =>  acc = acc + parseInt(cur.price) , 0 )
 
   const HandellPage=()=>{
@@ -141,18 +143,56 @@ const Swal = require('sweetalert2')
       }
       return output.split('').reverse().join('')+fraction;
     }
+
+    // Product.userCourse.courseId
+
     let CourseId=Product.map((item)=>item)
     const [ItemProduct, SetItemProduct] = useState([]);
     useEffect(() => {
       const getDAta = async () => {
-        // SetItemProduct();
-        const response = await fetch(`http://192.168.1.2:7007/api/Account/GetCourse/${""}`);
+        const response = await fetch(`http://192.168.1.2:7007/api/Account/GetCourse/${state.St}`);
         const data = await response.json();
-        SetItemProduct(data);
+        setProduct(data);
         console.log(data);
       };
       getDAta();
     }, []);
+
+      const [Token , setToken]=useState();
+      useEffect(()=>{
+         const GetData= async()=>{
+          console.log("psa")
+          const response = await fetch(`http://192.168.1.2:7007/api/Basket/Payment`,{
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + Cook,
+            }
+          });
+          const data = await response.json();
+          setToken(data)
+        }
+        GetData();
+      },[])
+      
+        const [Basket , SetBasket]=useState();
+        const SendPyment= async ()=>{
+          console.log(Token.token);
+          const res = await fetch(`http://192.168.1.2:7007/api/Basket/SendTokenIPG/${Token.token}`,{
+             method: 'POST',
+            headers: {'Accept': 'application/json','Content-Type': 'application/json' , 'Authorization': 'Bearer ' + Cook}
+          });
+          const data = await res.json();
+          SetBasket(data)
+          if(res.ok){
+    navigate("/Dargah", { state: { data } });
+          }
+          console.log(data)
+        }
+          
+
+      
   return (
     <div>
         <Navbar/>
@@ -189,6 +229,7 @@ const Swal = require('sweetalert2')
               <div className='w-[90%] mr-4  h-20 mt-5 rounded-xl flex items-center'>
               <div className='w-[85%] flex items-center h-full rounded-xl justify-around bg-gray-500 '>
                 <div className='w-24  mr-2 h-14 rounded-xl bg-blue-200'>
+                <img className='w-full h-full rounded-xl' src="" alt="" />
                 <h1>{item.id}</h1>
                 </div>
                 <div className='w-24  mr-2 h-14 rounded-xl bg-blue-200'>
@@ -215,7 +256,7 @@ const Swal = require('sweetalert2')
                 <h1  className='relative right-24'>{` ${separated(Price)} تومان`}</h1>
               </div>
               <h1>{""}</h1>
-                <button onClick={()=>Deletuser("")} className="relative flex justify-center items-center  w-16 rounded-lg h-20 bg-red-700 right-14 ">
+                <button onClick={SendPyment} className="relative flex justify-center items-center  w-16 rounded-lg h-20 bg-red-700 right-14 ">
                   <img src={Payment} alt="" />
                 </button>
                 </div>

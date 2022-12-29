@@ -6,6 +6,8 @@ import Cookies from "js-cookie";
 import FooterTop from "../Footer/FooterTop";
 import Footer from "../Footer/Footer";
 import Navbar from "../NavBar/Navbar";
+import Swal from 'sweetalert2';
+
 import BannerImage from "../../ui-site/undraw_reading_time_re_phf7 1.png";
 const Main = () => {
   const [Count, SetCount] = useState(1);
@@ -38,6 +40,18 @@ const Main = () => {
           })
           NavigateParsa('/')
         }
+        else if (!response.ok){
+          Swal.fire(
+            {
+            position: 'top-end',
+            icon: 'error',
+            text: data.message,
+            showConfirmButton: false,
+            timer: 1500
+          }
+          )
+        }
+        
       })
   }
   // End-Login-api
@@ -107,6 +121,7 @@ const Main = () => {
           })
           NavigateParsa('/')
         }
+       console.log(data)
       })
     console.error('There was an error!');
   }

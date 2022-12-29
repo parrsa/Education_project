@@ -59,7 +59,7 @@ const Navbar=()=>{
          <ul className="flex absolute  sm:bg-[#9161F8] sm:shadow-sm sm:shadow-[#9161F8] text-white  sm:mr-0 mr-40 md:mr-0 p-20 
          sm:w-64 sm:h-80 sm:top-20  sm:-translate-y-[490PX]   ">
           
-        <Link to='/'><li className="relative mr-10 sm:hover:bg-slate-100 sm:w-52 sm:-top-14 sm:-mr-14 sm:p-0 sm:text-2xl cursor-pointer transition-all  hover:text-violet-800  p-1.5 ">
+        <Link to={`/`}><li className="relative mr-10 sm:hover:bg-slate-100 sm:w-52 sm:-top-14 sm:-mr-14 sm:p-0 sm:text-2xl cursor-pointer transition-all  hover:text-violet-800  p-1.5 ">
           <a href="#">
             خانه</a>
           </li>
@@ -127,7 +127,7 @@ const Navbar=()=>{
 
             <Menu.Item>
                 {({ active }) => (
-               <Link to='/Login'>
+                  <Link to={`/Information/${1}`}>
                 <button
                     type="submit"
                     className={classNames(
@@ -144,7 +144,7 @@ const Navbar=()=>{
 
               <Menu.Item>
                 {({ active }) => (
-               <Link to='/Login'>
+                  <Link to={`/Information/${2}`}>
                 <button
                     type="submit"
                     className={classNames(
@@ -160,7 +160,7 @@ const Navbar=()=>{
 
               <Menu.Item>
                 {({ active }) => (
-               <Link to='/Login'>
+                  <Link to={`/Information/${3}`}>
                 <li
                     type="submit"
                     className={classNames(

@@ -9,10 +9,12 @@ import icon1 from "../../ui-site/Time Machine.png";
 import icon2 from "../../image/icons8-query-30.png";
 import icon3 from "../../image/icons8-price-30.png";
 import logo from "../../image/icons8-course-32.png";
+
 const Cards=()=> {
+
   const [item, SetItems] = useState([]); 
-  const [search, setSearch] = useState("")
-  
+  const [search, setSearch] = useState("");
+
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -50,9 +52,7 @@ const Cards=()=> {
       // console.log((Number/10))
       // const Number_sring = Number.toString();
       let fraction =''
-
       if(Number.split('.').length>1){
-
         fraction = "/" + Number.split('.')[1]
       }else{
 
@@ -98,7 +98,6 @@ const Cards=()=> {
         </div>
         <div className="flex  justify-evenly mr-5 md:-mr-4 sm:-mr-5 ">
           <div className="grid grid-cols-4 sm:grid-cols-2 md:grid-cols-3 sm:gap-4 sm:mr-4  gap-8">
-          
             {SearchC.map((item) => ( 
                <div onClick={()=>navigateToProductDetail(item)} className="w-64 sm:w-[170px] h-80 sm:h-[225px] sm:shadow-md sm:shadow-[#9161F8]  sm:rounded-md rounded-xl bg-white shadow-md">
                 <div className="w-64 sm:w-[170px]  h-40 sm:h-[100px] sm:rounded-md rounded-xl   ">
@@ -130,9 +129,7 @@ const Cards=()=> {
             ))}
           </div>
         </div>
-
         </div>
-        
       </div>
     </>
   );

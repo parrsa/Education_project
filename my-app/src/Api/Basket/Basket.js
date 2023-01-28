@@ -9,11 +9,11 @@ import Cookie from 'js-cookie';
 import Banner from "../../ui-site/No data-rafiki.png"
 import Remove from '../../ui-site/icons8-remove-48.png'
 import Payment from "../../ui-site/icons8-pay-30.png"
+
 const Basket = () => {
 const Swal = require('sweetalert2')
 const Cook=Cookie.get('TokenLogin1')
 const [Product , setProduct]=useState([])
-// console.log(Product);
 const navigate=useNavigate();
 const { state } = useLocation();
 
@@ -27,9 +27,9 @@ const { state } = useLocation();
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     })
-    .then((result) => {
+    .then(async(result) => {
       if (result.isConfirmed) {
-        const response =  fetch(`http://192.168.1.2:7007/api/Basket/DeleteBasket`,{
+        const response = await  fetch(`http://192.168.1.2:7007/api/Basket/DeleteBasket`,{
           method: 'POST',
           body:  item.courseId ,
          headers: {
@@ -39,11 +39,19 @@ const { state } = useLocation();
           }
         });
         const data=  response.json();
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+        if (response.ok){
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
+        }else{
+          Swal.fire(
+            'Failed!',
+            'Your file has not been deleted.',
+            'error'
+          )
+        }
       }
     })
   }
@@ -72,30 +80,16 @@ const { state } = useLocation();
 
   const separate = (Number)=> 
     {
-      // return Number;
-      // alert(typeof Number)
-      // console.log((Number/10))
-      // const Number_sring = Number.toString();
       let fraction =''
-
       if(Number.split('.').length>1){
-
         fraction = "/" + Number.split('.')[1]
       }else{
-
-        // fraction = '/0'
       }
-
       Number = Number.split('.')[0]
-
       const n = Number.length;
-      // let i = 1
       let output = ''
       Number = Number.split('').reverse().join('')
       for (let index = 1; index < n+1; index++) {
-        // let temp = Number%10;
-        // let x = Math.floor(2.3);
-        // Number = Number/10;
         let temp = Number.charAt(index-1)
         if (index%3 === 0 && index !==n){
           output = output + temp +','
@@ -110,30 +104,17 @@ const { state } = useLocation();
    
     const separated = (Number)=> 
     {
-      // return Number;
-      // alert(typeof Number)
-      // console.log((Number/10))
       const Number_sring = Number.toString();
       let fraction =''
-
       if(Number_sring.split('.').length>1){
-
         fraction = "/" + Number_sring.split('.')[1]
       }else{
-
-        // fraction = '/0'
       }
-
       Number = Number_sring.split('.')[0]
-
       const n = Number_sring.length;
-      // let i = 1
       let output = ''
       Number = Number_sring.split('').reverse().join('')
       for (let index = 1; index < n+1; index++) {
-        // let temp = Number%10;
-        // let x = Math.floor(2.3);
-        // Number = Number/10;
         let temp = Number.charAt(index-1)
         if (index%3 === 0 && index !==n){
           output = output + temp +','
@@ -148,9 +129,11 @@ const { state } = useLocation();
 
     let CourseId=Product.map((item)=>item)
     const [ItemProduct, SetItemProduct] = useState([]);
+    const [Token , setToken]=useState();
+
     useEffect(() => {
       const getDAta = async () => {
-        const response = await fetch(`http://192.168.1.2:7007/api/Account/GetCourse/${state.St}`);
+        const response = await fetch(`http://192.168.1.2:7007/api/Account/GetCourse/${state.Product}`);
         const data = await response.json();
         setProduct(data);
         console.log(data);
@@ -158,45 +141,31 @@ const { state } = useLocation();
       getDAta();
     }, []);
 
-      const [Token , setToken]=useState();
-      useEffect(()=>{
-         const GetData= async()=>{
-          console.log("psa")
-          const response = await fetch(`http://192.168.1.2:7007/api/Basket/Payment`,{
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json',
-              'Authorization': 'Bearer ' + Cook,
-            }
-          });
-          const data = await response.json();
-          setToken(data)
+    const GetPaymentToken= async()=>{
+      const response = await fetch(`http://192.168.1.2:7007/api/Basket/Payment`,{
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + Cook,
         }
-        GetData();
-      },[])
-      
-        const [Basket , SetBasket]=useState();
+      });
+      const data = await response.json();
+      setToken(data)
+    }
         const SendPyment= async ()=>{
-          console.log(Token.token);
-          const res = await fetch(`http://192.168.1.2:7007/api/Basket/SendTokenIPG/${Token.token}`,{
-             method: 'POST',
-            headers: {'Accept': 'application/json','Content-Type': 'application/json' , 'Authorization': 'Bearer ' + Cook}
-          });
-          const data = await res.json();
-          SetBasket(data)
-          if(res.ok){
-    navigate("/Dargah", { state: { data } });
+           GetPaymentToken();
+          console.log(Token.token)
+          var win = window.open(`https://fcp.shaparak.ir/_ipgw_/payment/?token=${Token.token}&lang=fa`, '_blank');
+          if (win != null) {
+            win.focus();
           }
-          console.log(data)
-        }
-          
 
-      
+        }
   return (
     <div>
         <Navbar/>
-        <div dir='rtl' className='w-full h-screen  bg-[#EFEFEF] flex font-KALAMEHBOLD  items-center'>
+        <div dir='rtl' className='w-full h-screen bg-[#EFEFEF] flex font-KALAMEHBOLD  items-center'>
         <div className='w-full h-full sm:h-fit justify-center items-center flex '>
         {!Cook && 
           <div className='w-[40%] sm:w-[65%] mt-10  h-[70%] '>
@@ -216,7 +185,7 @@ const { state } = useLocation();
         }
         {
           Cook && 
-          <div className='w-[60%] sm:w-[80%] relative mt-14  rounded-2xl  h-fit bg-white'>
+          <div className='w-[60%] sm:w-[90%] sm:mt-0 relative mt-14  rounded-2xl  h-fit bg-white'>
             <div className='w-full  rounded-t-xl  h-14 '>
               <h1 className='font-bold absolute mt-4  mr-5 text-xl '>
                 سبد خرید
@@ -240,7 +209,7 @@ const { state } = useLocation();
                 <h1>{` ${separate(item.price)} تومان`}</h1>
               </div>
               <h1></h1>
-                <button onClick={()=>Deletuser(item)} className="relative flex justify-center items-center w-16 rounded-lg h-20 bg-red-500 right-14 ">
+                <button onClick={()=>Deletuser(item)} className="relative flex justify-center items-center w-16 rounded-lg h-20 bg-red-500 right-14 sm:right-3  ">
                   <img src={Remove} alt="" className='w-10 h-10' />
                 </button>
               </div>
@@ -250,13 +219,13 @@ const { state } = useLocation();
             <>
             <div className='w-[90%] mr-4  h-20 mt-5 mb-10 rounded-xl flex  items-center  '>
             <div className='w-[85%] flex items-center h-full rounded-xl justify-around bg-gray-500 '>
-                <div className='w-24 h-14 rounded-xl flex items-center relative left-16'>
+                <div className='w-24 h-14 rounded-xl flex items-center relative left-16 sm:left-2'>
                 <h1 className='text-xl'>مجموع کل :</h1>
                 </div>
-                <h1  className='relative right-24'>{` ${separated(Price)} تومان`}</h1>
+                <h1  className='relative right-24 sm:right-2'>{` ${separated(Price)} تومان`}</h1>
               </div>
               <h1>{""}</h1>
-                <button onClick={SendPyment} className="relative flex justify-center items-center  w-16 rounded-lg h-20 bg-red-700 right-14 ">
+                <button onClick={SendPyment} className="relative flex justify-center items-center  w-16 rounded-lg h-20 bg-red-700 right-14 sm:right-3 ">
                   <img src={Payment} alt="" />
                 </button>
                 </div>

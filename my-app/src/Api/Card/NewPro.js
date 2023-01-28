@@ -82,8 +82,6 @@ const NewProducts = () => {
                 </div>
 
               </div>
-      
-              
             ))}
       </div>
     </div>

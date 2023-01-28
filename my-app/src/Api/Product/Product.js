@@ -21,7 +21,7 @@ const Product = () => {
   }
   const { state } = useLocation();
   const [item, setItem] = useState({});
-  const St=state.item.id;
+  const Product=state.item.id;
   useEffect(() => {
     console.log(state.item.id);
     const getDAta = async () => {
@@ -78,7 +78,7 @@ Swal.fire({
   timer: 1500
 },
 setTimeout(()=>{
-  navigate("//",{state:{St}})
+  navigate("//",{state:{Product}})
 },1600)
 
 )

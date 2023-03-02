@@ -1,4 +1,4 @@
-import React , {useEffect , useState} from 'react'
+import React , {useEffect , useMemo, useState} from 'react'
 import { json, useNavigate } from 'react-router-dom'
 import { useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -55,23 +55,42 @@ const { state } = useLocation();
       }
     })
   }
-
-  useEffect(() => {
-    const GetData= async ()=>{
-      const response=await fetch('http://192.168.1.2:7007/api/Basket/GetBasket', {
-        method: 'GET',
-        headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + Cook,
-        }
-      });
-     const data = await response.json();
-    //  console.log(data)
-     setProduct(data)
+let st=useMemo(()=>{
+  
+  const GetData= async ()=>{
+    console.log("first")
+  const response=await fetch('http://192.168.1.2:7007/api/Basket/GetBasket', {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + Cook,
     }
-    GetData()
-  },[Deletuser]);
+  });
+ const data = await response.json();
+//  console.log(data)
+ setProduct(data)
+}
+GetData()
+},[Deletuser])
+
+  // useEffect(() => {
+  //   console.log("first")
+  //   const GetData= async ()=>{
+  //   const response=await fetch('http://192.168.1.2:7007/api/Basket/GetBasket', {
+  //     method: 'GET',
+  //     headers: {
+  //       'Accept': 'application/json',
+  //       'Content-Type': 'application/json',
+  //       'Authorization': 'Bearer ' + Cook,
+  //     }
+  //   });
+  //  const data = await response.json();
+  // //  console.log(data)
+  //  setProduct(data)
+  // }
+  // GetData()
+  // },[Deletuser])
   let Price = Product.reduce((acc,cur) =>  acc = acc + parseInt(cur.price) , 0 )
 
   const HandellPage=()=>{

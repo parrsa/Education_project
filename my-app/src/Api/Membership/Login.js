@@ -10,7 +10,7 @@ import BannerImage from "../../ui-site/undraw_reading_time_re_phf7 1.png";
 const Main = () => {
   const [Count, SetCount] = useState(1);
   const [Phone, SetPhone] = useState("");
-
+console.log("first")
   function PostMobile(e) {
     SetPhone(e.target.value);
   }

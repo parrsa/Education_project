@@ -1,6 +1,4 @@
-import React , {useEffect , useMemo, useState} from 'react'
-import { json, useNavigate } from 'react-router-dom'
-import { useLocation } from 'react-router-dom';
+import { useEffect,useState,useMemo,useLocation,useNavigate } from '../../Static_import/Import';
 import Swal from 'sweetalert2';
 import Footer from '../Footer/Footer'
 import FooterTop from '../Footer/FooterTop'

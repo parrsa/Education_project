@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { Routes, Route } from 'react-router-dom'
+import { React, useState, useEffect, Link, useParams, Routes, Route } from '../../Static_import/Import'
 import Footer from '../Footer/Footer'
 import FooterTop from '../Footer/FooterTop'
 import Navbar from '../NavBar/Navbar'
@@ -9,8 +7,8 @@ import { data } from 'autoprefixer'
 export const Information = () => {
   const Cook = Cookie.get('TokenLogin1')
   const [UserData, SetUserData] = useState("");
-  const [City , SetCity]=useState("");
-  const [State , SetState]=useState("")
+  const [City, SetCity] = useState("");
+  const [State, SetState] = useState("")
   useEffect(() => {
     const GetInformationUser = async () => {
       const response = await fetch('http://192.168.1.2:7007/api/Admins/GetUser', {
@@ -24,24 +22,24 @@ export const Information = () => {
       const data = await response.json();
       SetUserData(data)
     }
-      GetInformationUser();
+    GetInformationUser();
 
-    const GetCity=async ()=>{ 
-      const response= await fetch(`http://192.168.1.2:7007/api/Account/GetCity/${UserData.cityId}`);
-      const data= await response.json();
+    const GetCity = async () => {
+      const response = await fetch(`http://192.168.1.2:7007/api/Account/GetCity/${UserData.cityId}`);
+      const data = await response.json();
       SetCity(data)
       console.log(data);
     }
     GetCity();
-    
-      // const GetState=async()=>{
-      //   const response=await fetch(`http://192.168.1.2:7007/api/Account/GetState/${City.stateId}`)
-      //   const data =await response.json();
-      //   SetState(data)
-      //   console.log(data)
-      // }
-      // GetState();
-  },[]);
+
+    // const GetState=async()=>{
+    //   const response=await fetch(`http://192.168.1.2:7007/api/Account/GetState/${City.stateId}`)
+    //   const data =await response.json();
+    //   SetState(data)
+    //   console.log(data)
+    // }
+    // GetState();
+  }, []);
   const params = useParams();
   console.log(UserData);
   return (
@@ -91,7 +89,7 @@ export const Information = () => {
 
                               <tr class="border-b  bg-gray-200 ">
                                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                {UserData.name}
+                                  {UserData.name}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                   :
@@ -106,7 +104,7 @@ export const Information = () => {
                                   {UserData.family}
                                 </td>
                                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                               
+
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                   نام خانوادگی
@@ -115,7 +113,7 @@ export const Information = () => {
 
                               <tr class="border-b bg-gray-200 ">
                                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                {UserData.mobile}
+                                  {UserData.mobile}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                   :
@@ -127,10 +125,10 @@ export const Information = () => {
 
                               <tr class="border-b  bg-transparent ">
                                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                            {UserData.email}
+                                  {UserData.email}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                  
+
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                   ایمیل
@@ -139,7 +137,7 @@ export const Information = () => {
 
                               <tr class="border-b  bg-gray-200 ">
                                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                {"State.name"}
+                                  {"State.name"}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                   :
@@ -151,10 +149,10 @@ export const Information = () => {
 
                               <tr class="bg-transparent ">
                                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                           {City.name}
+                                  {City.name}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                
+
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                   شهرستان
@@ -191,7 +189,7 @@ export const Information = () => {
                   <h1>parsa2</h1>
                 </div>
               </div>
-              </div>
+            </div>
           }
 
           {params.id == 3 &&

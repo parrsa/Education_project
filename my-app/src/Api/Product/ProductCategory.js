@@ -1,5 +1,4 @@
-import React ,{Fragment , useState , useEffect} from 'react'
-import { Link } from 'react-router-dom';
+import { useState,useEffect,Fragment,Link } from '../../Static_import/Import';
 import { Menu, Transition } from '@headlessui/react';
 const ProductCategory = (props) => {
 const {name}=props;

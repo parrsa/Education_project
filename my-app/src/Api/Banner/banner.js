@@ -1,5 +1,7 @@
-import React , {useState , useEffect} from "react";
-import { useNavigate } from "react-router-dom";
+// import React , {useState , useEffect} from "react";
+// import { useNavigate } from "react-router-dom";
+import {React,useEffect,useState,useNavigate} from '../../Static_import/Import'
+
 import BannerImage from "../../ui-site/undraw_education_f8ru 1.png";
 import Time from "../../ui-site/Time.png";
 import Money from '../../ui-site/Money.png'

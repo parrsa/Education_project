@@ -1,6 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useLocation } from "react-router-dom";
+import { useState, useEffect, Link, useNavigate, useLocation } from "../../Static_import/Import";
 import cookie from "cookie";
 import Cookies from "js-cookie";
 import FooterTop from "../Footer/FooterTop";
@@ -12,7 +10,7 @@ import BannerImage from "../../ui-site/undraw_reading_time_re_phf7 1.png";
 const Main = () => {
   const [Count, SetCount] = useState(1);
   const [Phone, SetPhone] = useState("");
-  
+
   function PostMobile(e) {
     SetPhone(e.target.value);
   }
@@ -27,7 +25,7 @@ const Main = () => {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ Mobile: Phone, Password: Password }),
     };
-    
+
     fetch("http://192.168.1.2:7007/api/Account/Login", requestOptions)
       .then(async (response) => {
 
@@ -42,18 +40,18 @@ const Main = () => {
           })
           NavigateParsa('/')
         }
-        else if (!response.ok){
+        else if (!response.ok) {
           Swal.fire(
             {
-            position: 'top-end',
-            icon: 'error',
-            text: data.message,
-            showConfirmButton: false,
-            timer: 1500
-          }
+              position: 'top-end',
+              icon: 'error',
+              text: data.message,
+              showConfirmButton: false,
+              timer: 1500
+            }
           )
         }
-        
+
       })
   }
   // End-Login-api
@@ -123,20 +121,20 @@ const Main = () => {
           })
           NavigateParsa('/')
         }
-       console.log(data)
+        console.log(data)
       })
     console.error('There was an error!');
   }
 
   const [State, SetState] = useState()
-  
+
   useEffect(() => {
     const getData = async () => {
       const response = await fetch
         ('http://192.168.1.2:7007/api/Account/GetStates');
       const data = await response.json();
       SetState(data)
-      if(data.length>0){
+      if (data.length > 0) {
         CreateSelectbox(data[0].id);
       }
     }
@@ -307,7 +305,7 @@ const Main = () => {
                               استان
                             </label>
 
-                            <select onChange={(event)=>{CreateSelectbox(event.target.value)}} className=" block full mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                            <select onChange={(event) => { CreateSelectbox(event.target.value) }} className=" block full mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
                               {State.map(item => (
                                 <option value={item.id} >
                                   {item.name}
@@ -321,13 +319,13 @@ const Main = () => {
                           <label for="password" class="mt-10 text-gray-900 ">
                             شهرستان
                           </label>
-                          <select onChange={(event)=>{SendCity(event.target.value)}} className=" block full mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
-                              {City.map(item => (
-                                <option value={item.id} >
-                                  {item.name}
-                                </option>
-                              ))}
-                            </select>
+                          <select onChange={(event) => { SendCity(event.target.value) }} className=" block full mt-1 px-2  bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40">
+                            {City.map(item => (
+                              <option value={item.id} >
+                                {item.name}
+                              </option>
+                            ))}
+                          </select>
                           {/* <select
                             className="block w-full mt-1 px-2 bg-white border rounded-md focus:border-purple-800 focus:ring-purple-300 focus:outline-none focus:ring focus:ring-opacity-40"
                           >

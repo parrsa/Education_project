@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation, useNavigate, Routes, Route } from "react-router-dom";
+import {React,useEffect,useState,useNavigate,Link} from '../../Static_import/Import'
 import Cookie from 'js-cookie'
 import Footer from "../Footer/Footer";
 import Navbar from "../NavBar/Navbar";
@@ -11,7 +10,7 @@ import icon3 from "../../image/icons8-price-30.png";
 import logo from "../../image/icons8-course-32.png";
 import Api from "./Api";
 const Cards = () => {
-const {item , search  }=Api('http://176.65.252.189:7007/api/Account/GetCourses')
+const {item , search  }=Api('http://192.168.1.2:7007/api/Account/GetCourses')
   // const [item, SetItems] = useState([]);
   // const [search, setSearch] = useState("");
 

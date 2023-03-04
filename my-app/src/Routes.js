@@ -8,7 +8,6 @@ import Pro from './Api/Product/Product'
 import Basket from './Api/Basket/Basket';
 import Information from './Api/UserControll/Information.js';
 import Notfound from './Api/NotFound/Notfound';
-import Dargah from './Api/ApiKhanm/Dargah';
 let router = [
     { path:'/', element: <Home /> },
     { path: '/courses', element: <Cards /> },
@@ -21,6 +20,5 @@ let router = [
     { path:'*', element:< Notfound />},
     { path:'information', element:< Information />},
     { path:'/information/:id', element:< Information />},
-    { path:'/Dargah', element:< Dargah />},
 ]
 export default router

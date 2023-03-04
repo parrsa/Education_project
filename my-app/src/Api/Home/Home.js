@@ -1,4 +1,4 @@
-import React, {useContext , useState} from 'react';
+import {React,useState} from '../../Static_import/Import'
 import Navbar from '../NavBar/Navbar';
 import Banner from '../Banner/Banner';
 import Card from '../Card/Cards';

@@ -1,5 +1,4 @@
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import{React ,useNavigate} from '../../Static_import/Import'
 import Footer from "../Footer/Footer";
 import FooterTop from "../Footer/FooterTop";
 import Navbar from "../NavBar/Navbar";

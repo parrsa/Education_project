@@ -1,7 +1,5 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { useLocation, Link } from "react-router-dom";
+import {useState, useEffect, Fragment, useLocation, Link, useNavigate} from '../../Static_import/Import';
 import { Menu, Transition } from "@headlessui/react";
-import { useNavigate } from "react-router-dom";
 import toast, { Toaster } from 'react-hot-toast';
 import Cookie from 'js-cookie';
 import Swal from 'sweetalert2';
@@ -14,14 +12,14 @@ import Video from "../../ui-site/Video.png";
 import ProductCategory from "./ProductCategory";
 import Comment from "./Comment";
 const Product = () => {
- const navigate=useNavigate();
- const Cook= Cookie.get('TokenLogin1')
+  const navigate = useNavigate();
+  const Cook = Cookie.get('TokenLogin1')
   function classNames(...classes) {
     return classes.filter(Boolean).join("");
   }
   const { state } = useLocation();
   const [item, setItem] = useState({});
-  const Product=state.item.id;
+  const Product = state.item.id;
   useEffect(() => {
     console.log(state.item.id);
     const getDAta = async () => {
@@ -35,95 +33,95 @@ const Product = () => {
     getDAta();
   }, []);
 
-//   function CreateUser(){
-//     const requestOptions = {
-//       method: 'POST',
-//       headers: { 'Content-Type': 'application/json' ,   'Authorization': 'Bearer ' + Cook },
-//       body: JSON.stringify({ 
-//         courseId : item.id ,
-//         accountPriceId : 6
-//       })
-//   };
-//   fetch('http://192.168.1.2:7007/api/Basket/AddBasket', requestOptions)
-//       .then(async (response) => {
-//         const isJson = response.headers .get('Content-Type') ?.includes("application/json");
-//         const data = isJson && (await response.json()); 
-//         console.log(data)
-//       })
-//           console.error('There was an error!');
-// }
-const Swal = require('sweetalert2')
-const CreateUser = async () => {
-  
-  if(Cook){
-    const response = await fetch(`http://192.168.1.2:7007/api/Basket/AddBasket`,{
-    method: 'POST',
-    body: JSON.stringify({
-      courseId : item.id ,
-        accountPriceId : 6
-    }),
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + Cook,
-    }
-  });
-const data = await response.json();
-console.log(data)
-Swal.fire({
-  position: 'top-end',
-  icon: 'success',
-  text: 'دوره به سبد خرید افزوده شد',
-  showConfirmButton: false,
-  timer: 1500
-},
-setTimeout(()=>{
-  navigate("//",{state:{Product}})
-},1600)
+  //   function CreateUser(){
+  //     const requestOptions = {
+  //       method: 'POST',
+  //       headers: { 'Content-Type': 'application/json' ,   'Authorization': 'Bearer ' + Cook },
+  //       body: JSON.stringify({ 
+  //         courseId : item.id ,
+  //         accountPriceId : 6
+  //       })
+  //   };
+  //   fetch('http://192.168.1.2:7007/api/Basket/AddBasket', requestOptions)
+  //       .then(async (response) => {
+  //         const isJson = response.headers .get('Content-Type') ?.includes("application/json");
+  //         const data = isJson && (await response.json()); 
+  //         console.log(data)
+  //       })
+  //           console.error('There was an error!');
+  // }
+  const Swal = require('sweetalert2')
+  const CreateUser = async () => {
 
-)
-  }
-  else{
-    Swal.fire(
-      {
-      position: 'top-end',
-      icon: 'error',
-      text: 'برای خرید در دوره  وارد حساب کاربری خود شوید ',
-      showConfirmButton: false,
-      timer: 1500
-    }
-    )
-    // Swal.fire({
-    //   title: 'Custom animation with Animate.css',
-    //   showClass: {
-    //     popup: 'animate__animated animate__fadeInDown'
-    //   },
-    //   hideClass: {
-    //     popup: 'animate__animated animate__fadeOutUp'
-    //   }
-    // })
-    setTimeout(()=>{
-navigate('/login')
-    },2000)
-    
-  }
-};
+    if (Cook) {
+      const response = await fetch(`http://192.168.1.2:7007/api/Basket/AddBasket`, {
+        method: 'POST',
+        body: JSON.stringify({
+          courseId: item.id,
+          accountPriceId: 6
+        }),
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + Cook,
+        }
+      });
+      const data = await response.json();
+      console.log(data)
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        text: 'دوره به سبد خرید افزوده شد',
+        showConfirmButton: false,
+        timer: 1500
+      },
+        setTimeout(() => {
+          navigate("//", { state: { Product } })
+        }, 1600)
 
-// const Click= ()=>{
-//   if(Cook){
-//     const requestOptions ={
-//       method : "POST",
-//       headers: { "Content-Type": "application/json" },
-//       body:{courseId:item.id , accountPriceId : 6}
-//     }
-//     fetch('http://192.168.1.2:7007/api/Basket/AddBasket' , requestOptions)
-//   .then( response =>{
-//     const isJson = response.headers .get('Content-Type') ?.includes("application/json");
-//     const data = isJson &&response.json();
-//      console.log(data)
-//   })
-//   }
-// }
+      )
+    }
+    else {
+      Swal.fire(
+        {
+          position: 'top-end',
+          icon: 'error',
+          text: 'برای خرید در دوره  وارد حساب کاربری خود شوید ',
+          showConfirmButton: false,
+          timer: 1500
+        }
+      )
+      // Swal.fire({
+      //   title: 'Custom animation with Animate.css',
+      //   showClass: {
+      //     popup: 'animate__animated animate__fadeInDown'
+      //   },
+      //   hideClass: {
+      //     popup: 'animate__animated animate__fadeOutUp'
+      //   }
+      // })
+      setTimeout(() => {
+        navigate('/login')
+      }, 2000)
+
+    }
+  };
+
+  // const Click= ()=>{
+  //   if(Cook){
+  //     const requestOptions ={
+  //       method : "POST",
+  //       headers: { "Content-Type": "application/json" },
+  //       body:{courseId:item.id , accountPriceId : 6}
+  //     }
+  //     fetch('http://192.168.1.2:7007/api/Basket/AddBasket' , requestOptions)
+  //   .then( response =>{
+  //     const isJson = response.headers .get('Content-Type') ?.includes("application/json");
+  //     const data = isJson &&response.json();
+  //      console.log(data)
+  //   })
+  //   }
+  // }
   return (
     <>
       <div>
@@ -204,13 +202,13 @@ navigate('/login')
                 <div className="w-80 h-fit rounded-t-2xl ">
                   <h1 className="mt-10 text-2xl sm:text-3xl ">توضیحات</h1>
                   <h1 dir="rtl" className="mt-10 sm:mt-5 sm:w-[350px] overflow-hidden  w-[800px] h-fit z-10 text-black text-2xl">
-                  {item.discription}
+                    {item.discription}
                   </h1>
                 </div>
                 <div className="w-full h-96 sm:h-fit   mt-10  sm:mr-2 ">
                   {/* box1 */}
                   {/* <div className="w-full  bg-white shadow-lg rounded-3xl shadow-slate-200 h-14 "></div> */}
-                  <ProductCategory  name={item.coursePicture} />
+                  <ProductCategory name={item.coursePicture} />
                 </div>
               </div>
             </div>

@@ -1,5 +1,4 @@
-import React,{useState} from 'react'
-import {Link} from 'react-router-dom'
+import { useState , Link } from '../../Static_import/Import';
 import { Cookies, useCookies  } from 'react-cookie';
 const Register = () => {
 

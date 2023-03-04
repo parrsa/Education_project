@@ -1,5 +1,4 @@
-import React, { Fragment, useState , useEffect ,useContext } from 'react';
-import { Link ,useNavigate } from 'react-router-dom';
+import {React,useEffect,useState,useNavigate,Link,Fragment} from '../../Static_import/Import'
 import { Menu, Transition } from '@headlessui/react';
 import { click } from '@testing-library/user-event/dist/click';
 import Cookie from 'js-cookie';

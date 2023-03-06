@@ -4,13 +4,14 @@ import FooterTop from '../Footer/FooterTop'
 import Navbar from '../NavBar/Navbar'
 import Cookie from 'js-cookie';
 import { data } from 'autoprefixer'
+import { useMemo } from 'react';
+import { NavLink } from 'react-router-dom';
 export const Information = () => {
   const Cook = Cookie.get('TokenLogin1')
   const [UserData, SetUserData] = useState("");
   const [City, SetCity] = useState("");
   const [State, SetState] = useState("")
-  useEffect(() => {
-    const GetInformationUser = async () => {
+  const GetInformationUser = async () => {
       const response = await fetch('http://192.168.1.2:7007/api/Admins/GetUser', {
         method: "GET",
         headers: {
@@ -22,16 +23,9 @@ export const Information = () => {
       const data = await response.json();
       SetUserData(data)
     }
-    GetInformationUser();
+    GetInformationUser();  
 
-    const GetCity = async () => {
-      const response = await fetch(`http://192.168.1.2:7007/api/Account/GetCity/${UserData.cityId}`);
-      const data = await response.json();
-      SetCity(data)
-      console.log(data);
-    }
-    GetCity();
-
+     
     // const GetState=async()=>{
     //   const response=await fetch(`http://192.168.1.2:7007/api/Account/GetState/${City.stateId}`)
     //   const data =await response.json();
@@ -39,7 +33,18 @@ export const Information = () => {
     //   console.log(data)
     // }
     // GetState();
-  }, []);
+    const GetState=useMemo(async()=>{
+      const res=await fetch(`http://192.168.1.2:7007/api/Account/GetState/${City.stateId}`)
+      const data=await res.json() ;
+      SetState(data)
+    },[GetInformationUser])
+
+ const GetCity = useMemo(async () => {
+      const response = await fetch(`http://192.168.1.2:7007/api/Account/GetCity/${UserData.cityId}`);
+      const data = await response.json();
+      SetCity(data)
+    },[GetState])
+
   const params = useParams();
   console.log(UserData);
   return (
@@ -137,7 +142,7 @@ export const Information = () => {
 
                               <tr class="border-b  bg-gray-200 ">
                                 <td class="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-                                  {"State.name"}
+                                  {State.name}
                                 </td>
                                 <td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                   :
@@ -183,7 +188,7 @@ export const Information = () => {
           }
 
           {params.id == 2 &&
-            <div className='w-full grid grid-cols-3 h-[90%]  rounded-b-2xl '>
+              <div className='w-full grid grid-cols-3 h-[90%]  rounded-b-2xl '>
               <div className="col-span-3 bg-red-800 flex  justify-center items-center row-span-2 sm:col-span-2 sm:row-span-1 ">
                 <div className='w-full h-full  bg-green-600'>
                   <h1>parsa2</h1>

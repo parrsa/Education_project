@@ -9,7 +9,7 @@ import Search from '../../ui-site/Search.png';
 import Account from '../../ui-site/Verified account.png'
 import Person from '../../ui-site/Person.png';
 import P from "../../ui-site/icons8-buying-64.png";
-import { redirect } from 'react-router-dom';
+import { NavLink, redirect } from 'react-router-dom';
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
@@ -64,7 +64,7 @@ const Navbar=()=>{
           </li>
           </Link>
 
-      <Link  to='/courses'> 
+      <Link   to='/courses'> 
        <li  className="relative mr-10 sm:hover:bg-slate-100 sm:w-52 sm:-top-14 sm:-mr-14 sm:p-0 sm:mt-5 p-1.5 cursor-pointer sm:text-2xl  transition-all  hover:text-violet-800">
         <a href="../Card/">دوره ها </a>
       </li>
